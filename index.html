@@ -1,0 +1,8037 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl" data-theme="light">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>CCNAQuest — CCNA R&amp;S IV — Connecting Networks</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+<script>
+
+(function() {
+
+  const stored = localStorage.getItem("ccna4_theme");
+
+  const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const theme = stored || (prefersDark ? "dark" : "light");
+
+  document.documentElement.setAttribute("data-theme", theme);
+
+})();
+
+</script>
+
+<style>
+
+:root {
+
+  /* Warm Parchment Palette */
+
+  --bg: #fbf4ea;
+
+  --card: #f2ebe2;
+
+  --surface-inset: #e8e0d5;
+
+  --text: #000000;
+
+  --text-sec: #393939;
+
+  --muted: #525151;
+
+  --line: #dcd5cc;
+
+  --primary: #7a1f33;
+
+  --primary-hover: #5e1827;
+
+  --primary-text: #fcfcfd;
+
+  --ok: #115e3b;
+
+  --okbg: #dcf2e6;
+
+  --bad: #9e1c1c;
+
+  --badbg: #f9e1e1;
+
+  --gold: #b3821a;
+
+
+
+  /* Inverse Ground / Boss Banner */
+
+  --boss-bg: #141314;
+
+  --boss-surface: #1e1c1e;
+
+  --boss-text: #fcfcfd;
+
+  --boss-line: #332f33;
+
+
+
+  /* Typography */
+
+  --font-serif: "EB Garamond", "Tajawal", Georgia, serif;
+
+  --font-sans: "Host Grotesk", "Tajawal", system-ui, -apple-system, sans-serif;
+
+  --font-ar: "Tajawal", "Host Grotesk", system-ui, -apple-system, sans-serif;
+
+  --font-code: ui-monospace, "SF Mono", "Cascadia Code", "Fira Code", Menlo, Consolas, monospace;
+
+
+
+  /* Geometric rules */
+
+  --radius: 8px;
+
+  --sh: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+  --sh-hover: 0 4px 14px rgba(0, 0, 0, 0.08);
+
+
+
+  box-sizing: border-box;
+
+  padding-top: env(safe-area-inset-top, 0px);
+
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+
+}
+
+
+
+[data-theme="dark"] {
+
+  --bg: #141314;
+
+  --card: #1e1c1e;
+
+  --surface-inset: #262326;
+
+  --text: #fcfcfd;
+
+  --text-sec: #dcd5cc;
+
+  --muted: #9e9a98;
+
+  --line: #332f33;
+
+  --primary: #942b42;
+
+  --primary-hover: #ad3751;
+
+  --primary-text: #fcfcfd;
+
+  --ok: #5ef0b0;
+
+  --okbg: #0d3a2c;
+
+  --bad: #ff9d94;
+
+  --badbg: #44201f;
+
+  --gold: #e5a93b;
+
+  --boss-bg: #0c0b0c;
+
+  --boss-surface: #181618;
+
+  --boss-text: #fcfcfd;
+
+  --boss-line: #2b272b;
+
+  --sh: 0 1px 3px rgba(0, 0, 0, 0.3);
+
+  --sh-hover: 0 6px 18px rgba(0, 0, 0, 0.5);
+
+}
+
+
+
+@media (prefers-color-scheme: dark) {
+
+  :root:not([data-theme="light"]) {
+
+    --bg: #141314;
+
+    --card: #1e1c1e;
+
+    --surface-inset: #262326;
+
+    --text: #fcfcfd;
+
+    --text-sec: #dcd5cc;
+
+    --muted: #9e9a98;
+
+    --line: #332f33;
+
+    --primary: #942b42;
+
+    --primary-hover: #ad3751;
+
+    --primary-text: #fcfcfd;
+
+    --ok: #5ef0b0;
+
+    --okbg: #0d3a2c;
+
+    --bad: #ff9d94;
+
+    --badbg: #44201f;
+
+    --gold: #e5a93b;
+
+    --boss-bg: #0c0b0c;
+
+    --boss-surface: #181618;
+
+    --boss-text: #fcfcfd;
+
+    --boss-line: #2b272b;
+
+    --sh: 0 1px 3px rgba(0, 0, 0, 0.3);
+
+    --sh-hover: 0 6px 18px rgba(0, 0, 0, 0.5);
+
+  }
+
+}
+
+
+
+*, *::before, *::after {
+
+  box-sizing: border-box;
+
+}
+
+
+
+html {
+
+  -webkit-text-size-adjust: 100%;
+
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+
+}
+
+
+
+body {
+
+  margin: 0;
+
+  background: var(--bg);
+
+  color: var(--text);
+
+  font-family: var(--font-ar);
+
+  line-height: 1.6;
+
+  min-height: 100vh;
+
+  -webkit-font-smoothing: antialiased;
+
+  -moz-osx-font-smoothing: grayscale;
+
+  transition: background 0.2s ease, color 0.2s ease;
+
+}
+
+
+
+/* Suppress legacy sci-fi animations and glowing floating objects */
+
+.bub, .rp, .fx {
+
+  display: none !important;
+
+}
+
+
+
+/* Header */
+
+header {
+
+  background: var(--card);
+
+  border-bottom: 1px solid var(--line);
+
+  color: var(--text);
+
+  padding: 24px 24px 22px;
+
+  position: relative;
+
+  z-index: 10;
+
+  box-shadow: var(--sh);
+
+}
+
+
+
+.header-wrap {
+
+  max-width: 1120px;
+
+  margin: 0 auto;
+
+}
+
+
+
+.header-row {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 16px;
+
+}
+
+
+
+.header-brand {
+
+  display: flex;
+
+  align-items: baseline;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+
+}
+
+
+
+.header-brand h1 {
+
+  margin: 0;
+
+  font-family: var(--font-serif);
+
+  font-size: clamp(28px, 4vw, 36px);
+
+  font-weight: 700;
+
+  color: var(--primary);
+
+  letter-spacing: -0.5px;
+
+  line-height: 1.1;
+
+}
+
+
+
+.header-badge {
+
+  font-family: var(--font-ar);
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  color: var(--muted);
+
+  background: var(--surface-inset);
+
+  border: 1px solid var(--line);
+
+  padding: 3px 10px;
+
+  border-radius: var(--radius);
+
+  letter-spacing: 0.2px;
+
+}
+
+
+
+.header-meta {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+}
+
+
+
+.chip {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  background: var(--surface-inset);
+
+  border: 1px solid var(--line);
+
+  color: var(--text-sec);
+
+  padding: 7px 16px;
+
+  border-radius: var(--radius);
+
+  font-family: var(--font-ar);
+
+  font-size: 13.5px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.2px;
+
+}
+
+
+
+.theme-toggle {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  background: var(--card);
+
+  border: 1px solid var(--line);
+
+  color: var(--text);
+
+  padding: 7px 14px;
+
+  border-radius: var(--radius);
+
+  font-family: var(--font-ar);
+
+  font-size: 13.5px;
+
+  font-weight: 700;
+
+  min-height: 38px;
+
+  cursor: pointer;
+
+  touch-action: manipulation;
+
+  transition: all 0.2s ease;
+
+}
+
+
+
+.theme-toggle:hover {
+
+  background: var(--surface-inset);
+
+  border-color: var(--primary);
+
+  color: var(--primary);
+
+}
+
+
+
+.theme-toggle:focus-visible {
+
+  outline: 2px solid var(--primary);
+
+  outline-offset: 2px;
+
+}
+
+
+
+.theme-toggle .icon-sun {
+
+  display: none;
+
+}
+
+
+
+.theme-toggle .icon-moon {
+
+  display: block;
+
+}
+
+
+
+[data-theme="dark"] .theme-toggle .icon-sun {
+
+  display: block;
+
+}
+
+
+
+[data-theme="dark"] .theme-toggle .icon-moon {
+
+  display: none;
+
+}
+
+
+
+/* Live Digital Clock Badge */
+
+.clock-chip {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  background: var(--surface-inset);
+
+  border: 1px solid var(--line);
+
+  color: var(--text-sec);
+
+  padding: 7px 14px;
+
+  border-radius: var(--radius);
+
+  font-family: var(--font-code);
+
+  font-size: 13.5px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  min-height: 38px;
+
+  white-space: nowrap;
+
+  font-variant-numeric: tabular-nums;
+
+  direction: ltr;
+
+}
+
+
+
+.clock-chip .clock-icon {
+
+  color: var(--primary);
+
+  flex-shrink: 0;
+
+}
+
+
+
+/* Exam Timer & Stopwatch Widget */
+
+.exam-timer-widget {
+
+  display: inline-flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 5px;
+
+  background: var(--card);
+
+  border: 1px solid var(--line);
+
+  padding: 5px 12px;
+
+  border-radius: var(--radius);
+
+  transition: all 0.25s ease;
+
+}
+
+
+
+.timer-main-row {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+}
+
+
+
+.timer-mode-pills {
+
+  display: inline-flex;
+
+  background: var(--surface-inset);
+
+  border: 1px solid var(--line);
+
+  border-radius: calc(var(--radius) - 2px);
+
+  padding: 2px;
+
+  gap: 2px;
+
+}
+
+
+
+.timer-mode-btn {
+
+  background: transparent;
+
+  border: none;
+
+  border-radius: calc(var(--radius) - 4px);
+
+  padding: 3px 8px;
+
+  font-family: var(--font-ar);
+
+  font-size: 11.5px;
+
+  font-weight: 700;
+
+  color: var(--muted);
+
+  cursor: pointer;
+
+  transition: all 0.15s ease;
+
+  line-height: 1.2;
+
+}
+
+
+
+.timer-mode-btn:hover {
+
+  color: var(--text);
+
+}
+
+
+
+.timer-mode-btn.active {
+
+  background: var(--card);
+
+  color: var(--primary);
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+}
+
+
+
+[data-theme="dark"] .timer-mode-btn.active {
+
+  color: var(--primary-text);
+
+  background: var(--primary);
+
+}
+
+
+
+.timer-core {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+}
+
+
+
+.timer-digits {
+
+  font-family: var(--font-code);
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  color: var(--text);
+
+  font-variant-numeric: tabular-nums;
+
+  min-width: 48px;
+
+  text-align: center;
+
+  direction: ltr;
+
+}
+
+
+
+.timer-actions {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 3px;
+
+}
+
+
+
+.timer-action-btn {
+
+  background: var(--surface-inset);
+
+  border: 1px solid var(--line);
+
+  color: var(--text-sec);
+
+  border-radius: calc(var(--radius) - 3px);
+
+  width: 26px;
+
+  height: 26px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  padding: 0;
+
+  transition: all 0.15s ease;
+
+}
+
+
+
+.timer-action-btn:hover {
+
+  background: var(--card);
+
+  border-color: var(--primary);
+
+  color: var(--primary);
+
+}
+
+
+
+.timer-presets {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  padding-top: 3px;
+
+  border-top: 1px dashed var(--line);
+
+  width: 100%;
+
+  justify-content: center;
+
+}
+
+
+
+.timer-presets-label {
+
+  font-family: var(--font-ar);
+
+  font-size: 10.5px;
+
+  font-weight: 600;
+
+  color: var(--muted);
+
+  margin-left: 2px;
+
+}
+
+
+
+.timer-preset-btn {
+
+  background: var(--surface-inset);
+
+  border: 1px solid var(--line);
+
+  color: var(--text-sec);
+
+  border-radius: calc(var(--radius) - 4px);
+
+  padding: 2px 6px;
+
+  font-family: var(--font-ar);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: all 0.15s ease;
+
+  line-height: 1.2;
+
+}
+
+
+
+.timer-preset-btn:hover {
+
+  border-color: var(--primary);
+
+  color: var(--primary);
+
+}
+
+
+
+.timer-preset-btn.active {
+
+  background: var(--primary);
+
+  color: var(--primary-text);
+
+  border-color: var(--primary);
+
+}
+
+
+
+@keyframes timerPulse {
+
+  0%, 100% {
+
+    transform: scale(1);
+
+    box-shadow: 0 0 0 0 rgba(229, 169, 59, 0.4);
+
+    border-color: var(--gold);
+
+  }
+
+  50% {
+
+    transform: scale(1.025);
+
+    box-shadow: 0 0 10px 2px rgba(158, 28, 28, 0.35);
+
+    border-color: var(--bad);
+
+  }
+
+}
+
+
+
+.exam-timer-widget.warning {
+
+  border-color: var(--bad);
+
+  background: var(--badbg);
+
+  animation: timerPulse 1.2s infinite ease-in-out;
+
+}
+
+
+
+.exam-timer-widget.warning .timer-digits {
+
+  color: var(--bad);
+
+  font-weight: 800;
+
+}
+
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .exam-timer-widget.warning {
+
+    animation: none;
+
+    border-color: var(--bad);
+
+    background: var(--badbg);
+
+  }
+
+}
+
+
+
+.timer-alert-banner {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 14px;
+
+  background: var(--badbg);
+
+  border: 1.5px solid var(--bad);
+
+  border-radius: var(--radius);
+
+  padding: 12px 16px;
+
+  margin-bottom: 14px;
+
+  animation: bannerFadeIn 0.3s ease-out;
+
+  flex-wrap: wrap;
+
+}
+
+
+
+@keyframes bannerFadeIn {
+
+  from { opacity: 0; transform: translateY(-6px); }
+
+  to { opacity: 1; transform: translateY(0); }
+
+}
+
+
+
+.timer-alert-info {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  flex: 1;
+
+  min-width: 220px;
+
+}
+
+
+
+.timer-alert-icon {
+
+  font-size: 24px;
+
+  flex-shrink: 0;
+
+}
+
+
+
+.timer-alert-title {
+
+  display: block;
+
+  font-family: var(--font-ar);
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  color: var(--bad);
+
+  margin-bottom: 2px;
+
+}
+
+
+
+.timer-alert-msg {
+
+  margin: 0;
+
+  font-family: var(--font-ar);
+
+  font-size: 13.5px;
+
+  color: var(--text);
+
+  line-height: 1.5;
+
+}
+
+
+
+.timer-alert-actions {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+}
+
+
+
+.btn-timer-alert {
+
+  padding: 7px 14px;
+
+  border-radius: var(--radius);
+
+  font-family: var(--font-ar);
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  border: 1px solid transparent;
+
+  transition: all 0.2s ease;
+
+  touch-action: manipulation;
+
+  min-height: 36px;
+
+}
+
+
+
+.btn-timer-alert.ok {
+
+  background: var(--bad);
+
+  color: #fff;
+
+  border-color: var(--bad);
+
+}
+
+
+
+.btn-timer-alert.ok:hover {
+
+  opacity: 0.9;
+
+  transform: translateY(-1px);
+
+}
+
+
+
+.btn-timer-alert.alt {
+
+  background: var(--card);
+
+  color: var(--text);
+
+  border-color: var(--line);
+
+}
+
+
+
+.btn-timer-alert.alt:hover {
+
+  border-color: var(--text-sec);
+
+  background: var(--surface-inset);
+
+}
+
+
+
+header p {
+
+  margin: 10px 0 0;
+
+  font-family: var(--font-ar);
+
+  font-size: 15px;
+
+  color: var(--muted);
+
+  line-height: 1.5;
+
+}
+
+
+
+/* Main Container */
+
+main {
+
+  max-width: 1120px;
+
+  margin: 0 auto;
+
+  padding: 32px 24px 64px;
+
+  position: relative;
+
+  z-index: 1;
+
+}
+
+
+
+/* Lectures Grid */
+
+.grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+
+  gap: 20px;
+
+}
+
+
+
+.lec {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  background: var(--card);
+
+  border: 1px solid var(--line);
+
+  border-radius: var(--radius);
+
+  padding: 0;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  text-align: right;
+
+  font: inherit;
+
+  color: inherit;
+
+  min-height: 48px;
+
+  touch-action: manipulation;
+
+  -webkit-tap-highlight-color: transparent;
+
+  box-shadow: var(--sh);
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+
+}
+
+
+
+.lec:hover,
+
+.lec:focus-visible {
+
+  border-color: var(--primary);
+
+  box-shadow: var(--sh-hover);
+
+  outline: none;
+
+  transform: translateY(-2px);
+
+}
+
+
+
+.lec:focus-visible {
+
+  outline: 2px solid var(--primary);
+
+  outline-offset: 2px;
+
+}
+
+
+
+.lec > .art {
+
+  flex: 0 0 100%;
+
+  height: 112px;
+
+  color: var(--primary);
+
+  background: var(--surface-inset);
+
+  border-bottom: 1px solid var(--line);
+
+  display: grid;
+
+  place-items: center;
+
+  margin-bottom: 14px;
+
+  transition: background 0.2s ease, color 0.2s ease;
+
+}
+
+
+
+.art svg {
+
+  height: 74%;
+
+  width: auto;
+
+  max-width: 88%;
+
+}
+
+
+
+.lec > .ring {
+
+  margin: 0 0 16px;
+
+  margin-inline-start: 16px;
+
+}
+
+
+
+.ring {
+
+  flex: none;
+
+  width: 44px;
+
+  height: 44px;
+
+  border-radius: 50%;
+
+  display: grid;
+
+  place-items: center;
+
+  position: relative;
+
+  background: conic-gradient(var(--primary) calc(var(--p, 0) * 1%), var(--line) 0);
+
+  transition: background 0.6s ease;
+
+}
+
+
+
+.ring .badge {
+
+  width: 34px;
+
+  height: 34px;
+
+  border-radius: 50%;
+
+  background: var(--card);
+
+  border: 1px solid var(--line);
+
+  color: var(--primary);
+
+  display: grid;
+
+  place-items: center;
+
+  font-family: var(--font-serif);
+
+  font-weight: 700;
+
+  font-size: 16px;
+
+  box-shadow: none;
+
+}
+
+
+
+.lec > div:last-child {
+
+  padding: 0 0 16px;
+
+  padding-inline-end: 16px;
+
+  padding-inline-start: 12px;
+
+  min-width: 0;
+
+  flex: 1;
+
+}
+
+
+
+.lec b {
+
+  display: block;
+
+  font-family: var(--font-ar);
+
+  font-size: 17.5px;
+
+  font-weight: 700;
+
+  color: var(--text);
+
+  line-height: 1.35;
+
+}
+
+
+
+.lec span {
+
+  display: block;
+
+  font-family: var(--font-sans);
+
+  font-size: 13.5px;
+
+  font-weight: 500;
+
+  color: var(--muted);
+
+  direction: ltr;
+
+  text-align: right;
+
+  margin-top: 3px;
+
+  overflow-wrap: anywhere;
+
+}
+
+
+
+.lec small {
+
+  display: block;
+
+  margin-top: 8px;
+
+  color: var(--text-sec);
+
+  font-family: var(--font-ar);
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+}
+
+
+
+.mini {
+
+  display: block;
+
+  height: 4px;
+
+  background: var(--line);
+
+  border-radius: 4px;
+
+  margin-top: 8px;
+
+  overflow: hidden;
+
+}
+
+
+
+.mini b {
+
+  display: block;
+
+  height: 100%;
+
+  background: var(--primary) !important;
+
+  border-radius: 4px;
+
+  transition: width 0.4s ease;
+
+}
+
+
+
+/* All Questions Combined Card (.all-bank-card) */
+
+.all-bank-card {
+
+  grid-column: 1 / -1;
+
+  background: var(--card);
+
+  border: 1.5px solid var(--primary);
+
+  color: var(--text);
+
+  box-shadow: var(--sh);
+
+  position: relative;
+
+}
+
+
+
+.all-bank-card > .art {
+
+  background: linear-gradient(135deg, var(--surface-inset), var(--card));
+
+  color: var(--primary);
+
+  border-bottom: 1px solid var(--line);
+
+}
+
+
+
+.all-bank-card .ring {
+
+  background: conic-gradient(var(--primary) 100%, var(--line) 0);
+
+}
+
+
+
+.all-bank-card b {
+
+  font-family: var(--font-ar);
+
+  font-size: 19px;
+
+  font-weight: 800;
+
+  color: var(--primary);
+
+}
+
+
+
+[data-theme="dark"] .all-bank-card b {
+
+  color: var(--text);
+
+}
+
+
+
+.all-bank-card span {
+
+  font-family: var(--font-sans);
+
+  font-size: 14px;
+
+  color: var(--text-sec);
+
+}
+
+
+
+.all-bank-card small {
+
+  color: var(--primary);
+
+  font-weight: 700;
+
+  font-size: 13.5px;
+
+}
+
+
+
+[data-theme="dark"] .all-bank-card small {
+
+  color: var(--gold);
+
+}
+
+
+
+.q-head-meta {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+}
+
+
+
+.q-source-badge {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 3px 10px;
+
+  border-radius: 999px;
+
+  font-family: var(--font-ar);
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  color: var(--text);
+
+  background: var(--surface-inset);
+
+  border: 1px solid var(--line);
+
+  border-inline-start: 3px solid var(--badge-c, var(--primary));
+
+  white-space: nowrap;
+
+}
+
+
+
+/* Global Mistakes Card (.mistakes-card) */
+
+.mistakes-card {
+
+  grid-column: 1 / -1;
+
+  background: var(--card);
+
+  border: 1px solid var(--line);
+
+  color: var(--text);
+
+  box-shadow: var(--sh);
+
+  position: relative;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+
+}
+
+
+
+.mistakes-card.has-mistakes {
+
+  border-color: rgba(220, 38, 38, 0.4);
+
+}
+
+
+
+.mistakes-card.has-mistakes:hover,
+
+.mistakes-card.has-mistakes:focus-visible {
+
+  border-color: var(--bad);
+
+  box-shadow: 0 4px 18px rgba(158, 28, 28, 0.18);
+
+  transform: translateY(-2px);
+
+  cursor: pointer;
+
+  outline: none;
+
+}
+
+
+
+.mistakes-card.has-mistakes:focus-visible {
+
+  outline: 2px solid var(--bad);
+
+  outline-offset: 2px;
+
+}
+
+
+
+.mistakes-card.empty {
+
+  opacity: 0.85;
+
+  cursor: default;
+
+}
+
+
+
+.mistakes-card .art {
+
+  background: var(--surface-inset);
+
+  color: var(--bad);
+
+}
+
+
+
+[data-theme="dark"] .mistakes-card.has-mistakes {
+
+  border-color: rgba(255, 157, 148, 0.35);
+
+}
+
+
+
+[data-theme="dark"] .mistakes-card.has-mistakes:hover {
+
+  box-shadow: 0 6px 20px rgba(255, 157, 148, 0.25);
+
+}
+
+
+
+.mistakes-card .ring {
+
+  background: conic-gradient(var(--bad) calc(var(--p, 0) * 1%), var(--line) 0);
+
+}
+
+
+
+.mistakes-card .ring .badge {
+
+  background: var(--card);
+
+  color: var(--bad);
+
+  border-color: var(--line);
+
+}
+
+
+
+.mistakes-card b {
+
+  font-family: var(--font-serif);
+
+  font-size: 19px;
+
+  color: var(--text);
+
+}
+
+
+
+.mistakes-card span {
+
+  font-family: var(--font-sans);
+
+  font-size: 14px;
+
+  color: var(--text-sec);
+
+}
+
+
+
+.mistakes-card small {
+
+  color: var(--bad);
+
+  font-weight: 700;
+
+  font-size: 13px;
+
+}
+
+
+
+.mistakes-card.empty small {
+
+  color: var(--ok);
+
+}
+
+
+
+.btn-clear-mistakes {
+
+  background: transparent;
+
+  border: 1px solid var(--line);
+
+  color: var(--muted);
+
+  font-family: var(--font-ar);
+
+  font-size: 12px;
+
+  padding: 4px 10px;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+}
+
+
+
+.btn-clear-mistakes:hover {
+
+  background: var(--badbg);
+
+  color: var(--bad);
+
+  border-color: var(--bad);
+
+}
+
+
+
+/* Bookmarked Questions Card (.bookmarks-card) */
+
+.bookmarks-card {
+
+  grid-column: 1 / -1;
+
+  background: var(--card);
+
+  border: 1px solid var(--line);
+
+  color: var(--text);
+
+  box-shadow: var(--sh);
+
+  position: relative;
+
+  cursor: pointer;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+
+}
+
+
+
+.bookmarks-card.has-bookmarks {
+
+  border-color: rgba(179, 130, 26, 0.5);
+
+}
+
+
+
+.bookmarks-card:hover,
+
+.bookmarks-card:focus-visible {
+
+  border-color: var(--gold);
+
+  box-shadow: 0 4px 18px rgba(179, 130, 26, 0.2);
+
+  transform: translateY(-2px);
+
+  outline: none;
+
+}
+
+
+
+.bookmarks-card:focus-visible {
+
+  outline: 2px solid var(--gold);
+
+  outline-offset: 2px;
+
+}
+
+
+
+.bookmarks-card .art {
+
+  background: var(--surface-inset);
+
+  color: var(--gold);
+
+}
+
+
+
+[data-theme="dark"] .bookmarks-card.has-bookmarks {
+
+  border-color: rgba(229, 169, 59, 0.45);
+
+}
+
+
+
+[data-theme="dark"] .bookmarks-card:hover {
+
+  box-shadow: 0 6px 20px rgba(229, 169, 59, 0.25);
+
+}
+
+
+
+.bookmarks-card .ring {
+
+  background: conic-gradient(var(--gold) calc(var(--p, 0) * 1%), var(--line) 0);
+
+}
+
+
+
+.bookmarks-card .ring .badge {
+
+  background: var(--card);
+
+  color: var(--gold);
+
+  border-color: var(--line);
+
+}
+
+
+
+.bookmarks-card b {
+
+  font-family: var(--font-ar);
+
+  font-size: 19px;
+
+  font-weight: 800;
+
+  color: var(--text);
+
+}
+
+
+
+.bookmarks-card span {
+
+  font-family: var(--font-sans);
+
+  font-size: 14px;
+
+  color: var(--text-sec);
+
+}
+
+
+
+.bookmarks-card small {
+
+  color: var(--gold);
+
+  font-weight: 700;
+
+  font-size: 13px;
+
+}
+
+
+
+.bookmarks-card.empty small {
+
+  color: var(--muted);
+
+}
+
+
+
+.btn-clear-bookmarks {
+
+  background: transparent;
+
+  border: 1px solid var(--line);
+
+  color: var(--muted);
+
+  font-family: var(--font-ar);
+
+  font-size: 12px;
+
+  padding: 4px 10px;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+}
+
+
+
+.btn-clear-bookmarks:hover {
+
+  background: rgba(179, 130, 26, 0.14);
+
+  color: var(--gold);
+
+  border-color: var(--gold);
+
+}
+
+
+
+.bookmarks-empty {
+
+  text-align: center;
+
+  padding: 40px 24px;
+
+}
+
+
+
+.bookmarks-empty .empty-icon {
+
+  font-size: 48px;
+
+  margin-bottom: 12px;
+
+}
+
+
+
+.bookmarks-empty h2 {
+
+  margin: 0 0 10px;
+
+  font-family: var(--font-ar);
+
+  font-size: 22px;
+
+  color: var(--text);
+
+}
+
+
+
+.bookmarks-empty p {
+
+  margin: 0 auto 22px;
+
+  max-width: 460px;
+
+  color: var(--text-sec);
+
+  font-size: 15px;
+
+  line-height: 1.7;
+
+}
+
+
+
+/* Mixed Challenge Card (.boss) */
+
+.boss {
+
+  grid-column: 1 / -1;
+
+  background: var(--boss-bg);
+
+  border-color: var(--boss-line);
+
+  color: var(--boss-text);
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+
+}
+
+
+
+.boss:hover,
+
+.boss:focus-visible {
+
+  border-color: var(--gold);
+
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45);
+
+  transform: translateY(-2px);
+
+}
+
+
+
+.boss:focus-visible {
+
+  outline: 2px solid var(--gold);
+
+}
+
+
+
+.boss .art {
+
+  background: var(--boss-surface);
+
+  border-bottom: 1px solid var(--boss-line);
+
+  color: var(--gold);
+
+}
+
+
+
+.boss .ring {
+
+  background: conic-gradient(var(--gold) calc(var(--p, 100) * 1%), var(--boss-line) 0);
+
+}
+
+
+
+.boss .ring .badge {
+
+  background: var(--boss-surface);
+
+  color: var(--gold);
+
+  border-color: var(--boss-line);
+
+}
+
+
+
+.boss b {
+
+  color: var(--boss-text);
+
+  font-family: var(--font-serif);
+
+  font-size: 20px;
+
+  letter-spacing: -0.2px;
+
+}
+
+
+
+.boss span {
+
+  color: #dcd5cc;
+
+  font-family: var(--font-sans);
+
+  font-size: 14px;
+
+}
+
+
+
+.boss small {
+
+  color: var(--gold);
+
+  font-weight: 700;
+
+}
+
+
+
+.boss .mini b {
+
+  background: var(--gold) !important;
+
+}
+
+
+
+/* Active Quiz / Flashcard View (.q) */
+
+.bar {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 16px;
+
+  flex-wrap: wrap;
+
+}
+
+
+
+.tag {
+
+  background: var(--primary);
+
+  color: var(--primary-text);
+
+  border-radius: var(--radius);
+
+  padding: 6px 14px;
+
+  font-family: var(--font-ar);
+
+  font-weight: 700;
+
+  font-size: 14px;
+
+  letter-spacing: 0.2px;
+
+}
+
+
+
+.link {
+
+  background: var(--card);
+
+  border: 1px solid var(--line);
+
+  color: var(--text-sec);
+
+  border-radius: var(--radius);
+
+  font-family: var(--font-ar);
+
+  font-weight: 700;
+
+  font-size: 14px;
+
+  padding: 6px 14px;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  min-height: 38px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  touch-action: manipulation;
+
+}
+
+
+
+.link:hover,
+
+.link:focus-visible {
+
+  border-color: var(--primary);
+
+  color: var(--primary);
+
+  background: var(--surface-inset);
+
+  outline: none;
+
+}
+
+
+
+.link:focus-visible {
+
+  outline: 2px solid var(--primary);
+
+  outline-offset: 2px;
+
+}
+
+
+
+.mid {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+}
+
+
+
+.qr {
+
+  width: 38px;
+
+  height: 38px;
+
+  border-radius: 50%;
+
+  display: grid;
+
+  place-items: center;
+
+  position: relative;
+
+  isolation: isolate;
+
+  font-family: var(--font-sans);
+
+  font-weight: 700;
+
+  font-size: 13px;
+
+  background: conic-gradient(var(--primary) calc(var(--p, 0) * 1%), var(--line) 0);
+
+  transition: background 0.6s ease;
+
+}
+
+
+
+.qr::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 3px;
+
+  border-radius: 50%;
+
+  background: var(--card);
+
+  z-index: -1;
+
+}
+
+
+
+.qr span {
+
+  color: var(--text);
+
+}
+
+
+
+.qr.er {
+
+  background: conic-gradient(var(--bad) calc(var(--p, 0) * 1%), var(--line) 0);
+
+}
+
+
+
+.qr.er span {
+
+  color: var(--bad);
+
+  font-weight: 700;
+
+}
+
+
+
+.sc {
+
+  background: var(--card);
+
+  border: 1px solid var(--line);
+
+  border-radius: var(--radius);
+
+  padding: 4px 12px;
+
+  font-family: var(--font-ar);
+
+  font-weight: 700;
+
+  font-size: 13px;
+
+  color: var(--text);
+
+}
+
+
+
+.sc.fire {
+
+  background: #fff8f0;
+
+  border-color: #e5a93b;
+
+  color: #9c5c06;
+
+}
+
+
+
+[data-theme="dark"] .sc.fire {
+
+  background: #2b1d0d;
+
+  border-color: #a15d07;
+
+  color: #f5b759;
+
+}
+
+
+
+.prog {
+
+  height: 6px;
+
+  background: var(--line);
+
+  border-radius: 4px;
+
+  overflow: hidden;
+
+  margin-bottom: 20px;
+
+}
+
+
+
+.prog i {
+
+  display: block;
+
+  height: 100%;
+
+  background: var(--primary);
+
+  border-radius: 4px;
+
+  transition: width 0.35s ease;
+
+}
+
+
+
+.q {
+
+  background: var(--card);
+
+  border: 1px solid var(--line);
+
+  border-radius: var(--radius);
+
+  padding: 30px 26px;
+
+  box-shadow: var(--sh);
+
+}
+
+
+
+.q .kind {
+
+  font-family: var(--font-ar);
+
+  font-size: 13.5px;
+
+  font-weight: 700;
+
+  color: var(--muted);
+
+  margin-bottom: 12px;
+
+}
+
+
+
+.q h2 {
+
+  margin: 0 0 22px;
+
+  font-family: var(--font-sans);
+
+  white-space: pre-wrap;
+
+  font-size: 20px;
+
+  direction: ltr;
+
+  text-align: left;
+
+  line-height: 1.5;
+
+  font-weight: 700;
+
+  color: var(--text);
+
+  overflow-wrap: anywhere;
+
+}
+
+
+
+#opts {
+
+  counter-reset: o;
+
+}
+
+
+
+.opt {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  width: 100%;
+
+  direction: ltr;
+
+  text-align: left;
+
+  font-family: var(--font-sans);
+
+  font-size: 16px;
+
+  font-weight: 500;
+
+  color: var(--text);
+
+  background: var(--bg);
+
+  border: 1px solid var(--line);
+
+  border-radius: var(--radius);
+
+  padding: 12px 18px;
+
+  margin-bottom: 12px;
+
+  min-height: 48px;
+
+  cursor: pointer;
+
+  touch-action: manipulation;
+
+  -webkit-tap-highlight-color: transparent;
+
+  overflow-wrap: anywhere;
+
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+}
+
+
+
+.opt::before {
+
+  counter-increment: o;
+
+  content: counter(o, upper-alpha);
+
+  flex: none;
+
+  width: 28px;
+
+  height: 28px;
+
+  border-radius: 6px;
+
+  display: grid;
+
+  place-items: center;
+
+  font-family: var(--font-sans);
+
+  font-weight: 700;
+
+  font-size: 13px;
+
+  background: var(--surface-inset);
+
+  color: var(--text-sec);
+
+  border: 1px solid var(--line);
+
+  transition: all 0.15s ease;
+
+}
+
+
+
+.opt:hover:not(:disabled) {
+
+  background: var(--card);
+
+  border-color: var(--primary);
+
+  color: var(--text);
+
+}
+
+
+
+.opt:hover:not(:disabled)::before {
+
+  background: var(--primary);
+
+  color: var(--primary-text);
+
+  border-color: var(--primary);
+
+}
+
+
+
+.opt:focus-visible {
+
+  outline: 2px solid var(--primary);
+
+  outline-offset: 2px;
+
+}
+
+
+
+.opt:disabled {
+
+  cursor: default;
+
+}
+
+
+
+.opt.ok {
+
+  background: var(--okbg) !important;
+
+  border-color: var(--ok) !important;
+
+  color: var(--ok) !important;
+
+  font-weight: 700;
+
+}
+
+
+
+.opt.ok::before {
+
+  content: "✓";
+
+  background: var(--ok) !important;
+
+  color: #fff !important;
+
+  border-color: var(--ok) !important;
+
+}
+
+
+
+.opt.bad {
+
+  background: var(--badbg) !important;
+
+  border-color: var(--bad) !important;
+
+  color: var(--bad) !important;
+
+  font-weight: 700;
+
+}
+
+
+
+.opt.bad::before {
+
+  content: "✕";
+
+  background: var(--bad) !important;
+
+  color: #fff !important;
+
+  border-color: var(--bad) !important;
+
+}
+
+
+
+.tf {
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+
+}
+
+
+
+.tf .opt {
+
+  justify-content: center;
+
+  text-align: center;
+
+  margin: 0;
+
+  font-weight: 700;
+
+  font-size: 16.5px;
+
+}
+
+
+
+.tf .opt::before {
+
+  display: none;
+
+}
+
+
+
+.fb {
+
+  margin-top: 18px;
+
+  padding: 14px 18px;
+
+  border-radius: var(--radius);
+
+  font-family: var(--font-ar);
+
+  font-weight: 700;
+
+  font-size: 15px;
+
+  border: 1px solid transparent;
+
+}
+
+
+
+.fb.ok {
+
+  background: var(--okbg);
+
+  color: var(--ok);
+
+  border-color: var(--ok);
+
+}
+
+
+
+.fb.bad {
+
+  background: var(--badbg);
+
+  color: var(--bad);
+
+  border-color: var(--bad);
+
+}
+
+
+
+.fb em {
+
+  display: block;
+
+  font-style: normal;
+
+  font-family: var(--font-sans);
+
+  font-weight: 600;
+
+  direction: ltr;
+
+  text-align: left;
+
+  margin-top: 6px;
+
+  font-size: 14.5px;
+
+  opacity: 0.95;
+
+}
+
+
+
+#ans-box {
+
+  background: var(--card) !important;
+
+  border: 1px solid var(--line) !important;
+
+  border-inline-start: 4px solid var(--primary) !important;
+
+  border-inline-end: 1px solid var(--line) !important;
+
+  color: var(--text) !important;
+
+  border-radius: var(--radius) !important;
+
+  font-family: var(--font-sans) !important;
+
+}
+
+
+
+.btn {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-top: 18px;
+
+  background: var(--primary);
+
+  color: var(--primary-text);
+
+  border: 1px solid var(--primary);
+
+  border-radius: var(--radius);
+
+  font-family: var(--font-ar);
+
+  font-weight: 700;
+
+  font-size: 16px;
+
+  padding: 12px 28px;
+
+  min-height: 48px;
+
+  cursor: pointer;
+
+  touch-action: manipulation;
+
+  -webkit-tap-highlight-color: transparent;
+
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+
+}
+
+
+
+.btn:hover {
+
+  background: var(--primary-hover);
+
+  border-color: var(--primary-hover);
+
+}
+
+
+
+.btn:active {
+
+  transform: translateY(1px);
+
+}
+
+
+
+.btn:focus-visible {
+
+  outline: 2px solid var(--primary);
+
+  outline-offset: 2px;
+
+}
+
+
+
+.btn.alt {
+
+  background: var(--surface-inset);
+
+  color: var(--text);
+
+  border-color: var(--line);
+
+}
+
+
+
+.btn.alt:hover {
+
+  background: var(--card);
+
+  border-color: var(--text-sec);
+
+}
+
+
+
+.btn:disabled {
+
+  opacity: 0.5;
+
+  cursor: not-allowed;
+
+}
+
+
+
+/* Results & Review View (.res) */
+
+.res {
+
+  text-align: center;
+
+  background: var(--card);
+
+  border: 1px solid var(--line);
+
+  border-radius: var(--radius);
+
+  padding: 38px 24px;
+
+  box-shadow: var(--sh);
+
+  max-width: 860px;
+
+  margin: 0 auto;
+
+}
+
+
+
+.res > div:first-child {
+
+  font-family: var(--font-ar);
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  color: var(--muted);
+
+  margin-bottom: 6px;
+
+}
+
+
+
+.rank {
+
+  font-family: var(--font-ar);
+
+  font-size: 24px;
+
+  font-weight: 700;
+
+  color: var(--text);
+
+  margin: 12px 0 20px;
+
+}
+
+
+
+.rank b {
+
+  font-family: var(--font-serif);
+
+  font-size: 32px;
+
+  color: var(--primary);
+
+  margin: 0 6px;
+
+}
+
+
+
+.rank small {
+
+  display: block;
+
+  font-family: var(--font-ar);
+
+  font-size: 14.5px;
+
+  font-weight: 600;
+
+  color: var(--muted);
+
+  margin-top: 4px;
+
+}
+
+
+
+.rings {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: clamp(20px, 6vw, 44px);
+
+  margin: 24px 0 20px;
+
+  flex-wrap: wrap;
+
+}
+
+
+
+.rings figure {
+
+  margin: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+}
+
+
+
+.rings figcaption {
+
+  font-family: var(--font-ar);
+
+  font-weight: 700;
+
+  font-size: 14px;
+
+  color: var(--text-sec);
+
+  margin-top: 10px;
+
+}
+
+
+
+.res .n {
+
+  width: clamp(100px, 28vw, 128px);
+
+  height: clamp(100px, 28vw, 128px);
+
+  border-radius: 50%;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  place-items: center;
+
+  font-family: var(--font-serif);
+
+  font-size: clamp(26px, 6vw, 36px);
+
+  font-weight: 700;
+
+  color: var(--ok);
+
+  position: relative;
+
+  isolation: isolate;
+
+  background: conic-gradient(var(--ok) calc(var(--p, 0) * 1%), var(--line) 0);
+
+  transition: background 0.8s ease;
+
+}
+
+
+
+.res .n::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 6px;
+
+  border-radius: 50%;
+
+  background: var(--card);
+
+  z-index: -1;
+
+}
+
+
+
+.res .n2 {
+
+  background: conic-gradient(var(--bad) calc(var(--p, 0) * 1%), var(--line) 0) !important;
+
+  color: var(--bad) !important;
+
+}
+
+
+
+.res .time-ring {
+
+  background: conic-gradient(var(--primary) calc(var(--p, 0) * 1%), var(--line) 0) !important;
+
+  color: var(--primary) !important;
+
+}
+
+
+
+.res-time-summary {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  background: var(--surface-inset);
+
+  border: 1px solid var(--line);
+
+  padding: 6px 14px;
+
+  border-radius: var(--radius);
+
+  font-family: var(--font-ar);
+
+  font-size: 14px;
+
+  color: var(--text-sec);
+
+  margin: 12px auto 16px;
+
+}
+
+
+
+.res-time-summary b {
+
+  color: var(--text);
+
+  font-family: var(--font-ar);
+
+}
+
+
+
+.res p {
+
+  font-family: var(--font-ar);
+
+  font-size: 17px;
+
+  font-weight: 600;
+
+  color: var(--text);
+
+  margin: 16px 0 24px;
+
+  line-height: 1.5;
+
+}
+
+
+
+.rev {
+
+  margin-top: 32px;
+
+  text-align: right;
+
+  border-top: 1px solid var(--line);
+
+  padding-top: 24px;
+
+}
+
+
+
+.rev div {
+
+  direction: ltr;
+
+  text-align: left;
+
+  padding: 12px 16px;
+
+  border-radius: var(--radius);
+
+  margin-bottom: 10px;
+
+  font-family: var(--font-sans);
+
+  font-size: 15px;
+
+  line-height: 1.5;
+
+  border: 1px solid transparent;
+
+  overflow-wrap: anywhere;
+
+}
+
+
+
+.rev .ok {
+
+  background: var(--okbg);
+
+  color: var(--ok);
+
+  border-color: var(--ok);
+
+}
+
+
+
+.rev .bad {
+
+  background: var(--badbg);
+
+  color: var(--bad);
+
+  border-color: var(--bad);
+
+}
+
+
+
+/* Mobile & Accessibility */
+
+@media (max-width: 640px) {
+
+  header {
+
+    padding: 20px 16px 18px;
+
+  }
+
+  .header-row {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+  }
+
+  .header-meta {
+
+    width: 100%;
+
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+  }
+
+  .clock-chip {
+
+    font-size: 12px;
+
+    padding: 6px 10px;
+
+    min-height: 36px;
+
+  }
+
+  .exam-timer-widget {
+
+    width: 100%;
+
+    margin: 4px 0;
+
+  }
+
+  .timer-main-row {
+
+    width: 100%;
+
+    justify-content: space-between;
+
+  }
+
+  main {
+
+    padding: 20px 16px 48px;
+
+  }
+
+  .grid {
+
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+
+  }
+
+  .q {
+
+    padding: 20px 16px;
+
+  }
+
+  .q h2 {
+
+    font-size: 18px;
+
+  }
+
+  .opt {
+
+    padding: 11px 14px;
+
+    font-size: 15px;
+
+  }
+
+  .tf {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .btn {
+
+    width: 100%;
+
+  }
+
+  .res .btn {
+
+    width: 100%;
+
+    margin: 6px 0;
+
+  }
+
+  .lec > .art {
+
+    height: 96px;
+
+  }
+
+}
+
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  *, *::before, *::after {
+
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+
+  }
+
+}
+
+
+
+
+
+/* Question Number Strip */
+
+.q-strip-wrap {
+
+  margin-bottom: 20px;
+
+  background: var(--card);
+
+  border: 1px solid var(--line);
+
+  border-radius: var(--radius);
+
+  padding: 12px 14px 10px;
+
+  box-shadow: var(--sh);
+
+}
+
+
+
+.q-strip-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 10px;
+
+  font-family: var(--font-ar);
+
+  font-size: 13.5px;
+
+  font-weight: 700;
+
+  color: var(--muted);
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+}
+
+
+
+.q-strip-legend {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+}
+
+
+
+.q-strip-legend-item {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  color: var(--text-sec);
+
+}
+
+
+
+.q-strip-legend-dot {
+
+  width: 9px;
+
+  height: 9px;
+
+  border-radius: 50%;
+
+  display: inline-block;
+
+}
+
+
+
+.q-strip {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  overflow-x: auto;
+
+  overflow-y: hidden;
+
+  padding: 4px 2px 8px;
+
+  scroll-behavior: smooth;
+
+  -webkit-overflow-scrolling: touch;
+
+}
+
+
+
+.q-strip::-webkit-scrollbar {
+
+  height: 6px;
+
+}
+
+
+
+.q-strip::-webkit-scrollbar-track {
+
+  background: var(--surface-inset);
+
+  border-radius: 3px;
+
+}
+
+
+
+.q-strip::-webkit-scrollbar-thumb {
+
+  background: var(--line);
+
+  border-radius: 3px;
+
+}
+
+
+
+.q-strip::-webkit-scrollbar-thumb:hover {
+
+  background: var(--muted);
+
+}
+
+
+
+.q-pill {
+
+  flex: 0 0 36px;
+
+  width: 36px;
+
+  height: 36px;
+
+  border-radius: 8px;
+
+  display: grid;
+
+  place-items: center;
+
+  font-family: var(--font-sans);
+
+  font-weight: 700;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  border: 1px solid var(--line);
+
+  background: var(--surface-inset);
+
+  color: var(--text-sec);
+
+  touch-action: manipulation;
+
+  transition: all 0.15s ease;
+
+  user-select: none;
+
+  -webkit-tap-highlight-color: transparent;
+
+  padding: 0;
+
+}
+
+
+
+.q-pill:hover:not(.active) {
+
+  border-color: var(--primary);
+
+  color: var(--primary);
+
+  background: var(--card);
+
+}
+
+
+
+.q-pill:focus-visible {
+
+  outline: 2px solid var(--primary);
+
+  outline-offset: 2px;
+
+}
+
+
+
+/* Current active question */
+
+.q-pill.active {
+
+  background: #7a1f33 !important;
+
+  color: #fcfcfd !important;
+
+  border-color: #7a1f33 !important;
+
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px #7a1f33;
+
+  transform: translateY(-1px) scale(1.05);
+
+  font-weight: 800;
+
+  z-index: 2;
+
+}
+
+
+
+[data-theme="dark"] .q-pill.active {
+
+  background: #942b42 !important;
+
+  border-color: #942b42 !important;
+
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px #942b42;
+
+}
+
+
+
+/* Answered correctly */
+
+.q-pill.ok {
+
+  background: var(--okbg);
+
+  color: var(--ok);
+
+  border-color: var(--ok);
+
+}
+
+
+
+/* Answered incorrectly */
+
+.q-pill.bad {
+
+  background: var(--badbg);
+
+  color: var(--bad);
+
+  border-color: var(--bad);
+
+}
+
+
+
+/* Peeked / Revealed */
+
+.q-pill.peeked {
+
+  background: var(--surface-inset);
+
+  color: var(--gold);
+
+  border-color: var(--gold);
+
+  border-style: dashed;
+
+}
+
+
+
+/* Card Header with Peek Button */
+
+.q-card-head {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 14px;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+}
+
+
+
+.btn-peek {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  background: var(--surface-inset);
+
+  border: 1px dashed var(--line);
+
+  color: var(--text-sec);
+
+  border-radius: var(--radius);
+
+  font-family: var(--font-ar);
+
+  font-weight: 700;
+
+  font-size: 13px;
+
+  padding: 5px 12px;
+
+  cursor: pointer;
+
+  touch-action: manipulation;
+
+  transition: all 0.2s ease;
+
+  min-height: 32px;
+
+}
+
+
+
+.btn-peek:hover:not(:disabled) {
+
+  border-color: var(--primary);
+
+  color: var(--primary);
+
+  background: var(--card);
+
+}
+
+
+
+.btn-peek:disabled {
+
+  opacity: 0.55;
+
+  cursor: default;
+
+}
+
+
+
+.q-actions {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+}
+
+
+
+.btn-copy {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  background: var(--surface-inset);
+
+  border: 1px solid var(--line);
+
+  color: var(--text-sec);
+
+  border-radius: var(--radius);
+
+  font-family: var(--font-ar);
+
+  font-weight: 700;
+
+  font-size: 13px;
+
+  padding: 5px 12px;
+
+  cursor: pointer;
+
+  touch-action: manipulation;
+
+  transition: all 0.2s ease;
+
+  min-height: 32px;
+
+}
+
+
+
+.btn-copy:hover {
+
+  border-color: var(--primary);
+
+  color: var(--primary);
+
+  background: var(--card);
+
+}
+
+
+
+.btn-copy.copied {
+
+  border-color: var(--ok);
+
+  color: var(--ok);
+
+  background: var(--okbg);
+
+}
+
+
+
+.btn-bookmark {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  background: var(--surface-inset);
+
+  border: 1px solid var(--line);
+
+  color: var(--text-sec);
+
+  border-radius: var(--radius);
+
+  font-family: var(--font-ar);
+
+  font-weight: 700;
+
+  font-size: 13px;
+
+  padding: 5px 12px;
+
+  cursor: pointer;
+
+  touch-action: manipulation;
+
+  transition: all 0.2s ease;
+
+  min-height: 32px;
+
+}
+
+
+
+.btn-bookmark:hover {
+
+  border-color: var(--gold);
+
+  color: var(--gold);
+
+  background: var(--card);
+
+}
+
+
+
+.btn-bookmark.active {
+
+  border-color: var(--gold);
+
+  color: #8a5d00;
+
+  background: rgba(179, 130, 26, 0.16);
+
+  box-shadow: 0 0 0 1px rgba(179, 130, 26, 0.25);
+
+}
+
+
+
+[data-theme="dark"] .btn-bookmark.active {
+
+  color: #ffd166;
+
+  background: rgba(229, 169, 59, 0.2);
+
+  border-color: var(--gold);
+
+}
+
+
+
+/* Bottom Persistent Navigation */
+
+.q-nav {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-top: 24px;
+
+  padding-top: 18px;
+
+  border-top: 1px solid var(--line);
+
+  flex-wrap: wrap;
+
+}
+
+
+
+.q-nav .btn {
+
+  margin-top: 0;
+
+  flex: 1 1 140px;
+
+  min-height: 46px;
+
+  padding: 10px 20px;
+
+  font-size: 15.5px;
+
+}
+
+
+
+.q-nav-info {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-family: var(--font-ar);
+
+  font-weight: 700;
+
+  font-size: 14px;
+
+  color: var(--muted);
+
+  padding: 0 6px;
+
+}
+
+
+
+@media (max-width: 640px) {
+
+  .q-nav {
+
+    flex-direction: column-reverse;
+
+    gap: 10px;
+
+  }
+
+  .q-nav .btn {
+
+    width: 100%;
+
+    flex: none;
+
+  }
+
+  .q-nav-info {
+
+    order: -1;
+
+    margin-bottom: 4px;
+
+  }
+
+}
+
+
+
+
+
+pre {
+
+  background: var(--surface-inset);
+
+  border: 1px solid var(--line);
+
+  border-radius: 6px;
+
+  padding: 12px 16px;
+
+  overflow-x: auto;
+
+  font-family: var(--font-code);
+
+  font-size: 14px;
+
+  line-height: 1.55;
+
+  color: var(--text);
+
+  white-space: pre-wrap;
+
+  direction: ltr;
+
+  text-align: left;
+
+}
+
+code {
+
+  font-family: var(--font-code);
+
+}
+
+
+
+.code-box {
+
+  background: var(--surface-inset);
+
+  border: 1px solid var(--line);
+
+  border-left: 4px solid var(--ac, var(--primary));
+
+  border-radius: 6px;
+
+  padding: 12px 16px;
+
+  margin: 12px 0 16px;
+
+  overflow-x: auto;
+
+  font-family: var(--font-code);
+
+  font-size: 14px;
+
+  line-height: 1.55;
+
+  color: var(--text);
+
+  white-space: pre-wrap;
+
+  direction: ltr;
+
+  text-align: left;
+
+}
+
+
+
+/* Instant Global Search & Keyword Filter */
+
+.global-search-wrap {
+
+  background: var(--card);
+
+  border: 1px solid var(--line);
+
+  border-radius: var(--radius);
+
+  box-shadow: var(--sh);
+
+  padding: 14px 16px;
+
+  margin-bottom: 18px;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+}
+
+.global-search-wrap:focus-within {
+
+  border-color: var(--primary);
+
+  box-shadow: var(--sh-hover);
+
+}
+
+.global-search-row {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+}
+
+.search-input-wrap {
+
+  position: relative;
+
+  flex: 1 1 280px;
+
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+}
+
+.global-search-input {
+
+  width: 100%;
+
+  min-height: 44px;
+
+  padding: 10px 14px;
+
+  padding-inline-end: 40px;
+
+  background: var(--surface-inset);
+
+  color: var(--text);
+
+  border: 1px solid var(--line);
+
+  border-radius: var(--radius);
+
+  font-family: var(--font-ar);
+
+  font-size: 14.5px;
+
+  line-height: 1.4;
+
+  outline: none;
+
+  transition: border-color 0.2s ease, background 0.2s ease;
+
+}
+
+.global-search-input::-webkit-search-cancel-button {
+
+  -webkit-appearance: none;
+
+  appearance: none;
+
+}
+
+.global-search-input::placeholder {
+
+  color: var(--muted);
+
+}
+
+.global-search-input:focus {
+
+  border-color: var(--primary);
+
+  background: var(--card);
+
+}
+
+.search-clear-btn {
+
+  position: absolute;
+
+  inset-inline-end: 8px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 26px;
+
+  height: 26px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: var(--line);
+
+  color: var(--text-sec);
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0;
+
+  transition: background 0.15s ease, color 0.15s ease;
+
+}
+
+.search-clear-btn:hover {
+
+  background: var(--primary);
+
+  color: var(--primary-text);
+
+}
+
+.search-clear-btn[hidden],
+
+.search-count-badge[hidden],
+
+.search-launch-btn[hidden],
+
+.search-preview[hidden] {
+
+  display: none !important;
+
+}
+
+.search-controls {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+}
+
+.search-count-badge {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-family: var(--font-ar);
+
+  font-size: 13.5px;
+
+  font-weight: 700;
+
+  background: var(--okbg);
+
+  color: var(--ok);
+
+  border: 1px solid currentColor;
+
+  white-space: nowrap;
+
+}
+
+.search-count-badge.zero {
+
+  background: var(--badbg);
+
+  color: var(--bad);
+
+}
+
+.search-launch-btn {
+
+  margin-top: 0 !important;
+
+  min-height: 44px;
+
+  padding: 9px 16px !important;
+
+  font-size: 14px !important;
+
+  white-space: nowrap;
+
+}
+
+.search-preview {
+
+  margin-top: 12px;
+
+  padding-top: 10px;
+
+  border-top: 1px solid var(--line);
+
+  max-height: 260px;
+
+  overflow-y: auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+
+}
+
+.search-hit {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  width: 100%;
+
+  text-align: right;
+
+  background: var(--surface-inset);
+
+  border: 1px solid var(--line);
+
+  border-radius: 6px;
+
+  padding: 9px 12px;
+
+  color: var(--text);
+
+  font-family: var(--font-ar);
+
+  font-size: 13.5px;
+
+  cursor: pointer;
+
+  transition: border-color 0.15s ease, transform 0.15s ease;
+
+}
+
+.search-hit:hover {
+
+  border-color: var(--primary);
+
+  transform: translateY(-1px);
+
+}
+
+.search-hit-q {
+
+  flex: 1 1 auto;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  direction: auto;
+
+}
+
+.search-hit-src {
+
+  flex-shrink: 0;
+
+  font-size: 11.5px;
+
+  font-weight: 700;
+
+  padding: 2px 8px;
+
+  border-radius: 999px;
+
+  color: var(--badge-c, var(--primary));
+
+  background: var(--card);
+
+  border: 1px solid var(--line);
+
+  white-space: nowrap;
+
+}
+
+.search-empty-msg {
+
+  text-align: center;
+
+  color: var(--muted);
+
+  font-size: 13.5px;
+
+  padding: 8px 4px;
+
+}
+
+@media (max-width: 640px) {
+
+  .global-search-row {
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+  }
+
+  .search-input-wrap {
+
+    flex: none;
+
+    width: 100%;
+
+  }
+
+  .search-controls {
+
+    justify-content: space-between;
+
+    width: 100%;
+
+  }
+
+  .search-launch-btn {
+
+    flex: 1 1 auto;
+
+  }
+
+}
+
+
+
+.kb-hint {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 6px;
+
+  margin-top: 12px;
+
+  padding-top: 8px;
+
+  font-family: var(--font-ar);
+
+  font-size: 11.5px;
+
+  color: var(--muted);
+
+  opacity: 0.78;
+
+  user-select: none;
+
+}
+
+
+
+.kb-hint kbd {
+
+  display: inline-block;
+
+  font-family: var(--font-code);
+
+  font-size: 10.5px;
+
+  line-height: 1.2;
+
+  padding: 1px 5px;
+
+  border-radius: 4px;
+
+  border: 1px solid var(--line);
+
+  background: var(--surface-inset);
+
+  color: var(--text-sec);
+
+  direction: ltr;
+
+}
+
+
+
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+
+  .kb-hint {
+
+    display: none;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="header-wrap">
+
+    <div class="header-row">
+
+      <div class="header-brand">
+
+        <h1>CCNAQuest</h1>
+
+        <span class="header-badge">CCNA R&amp;S IV — Connecting Networks</span>
+
+      </div>
+
+      <div class="header-meta">
+
+        <span class="chip" id="cnt"></span>
+
+        <div class="clock-chip" id="live-clock" title="الوقت الحالي" aria-label="الوقت الحالي">
+
+          <svg class="clock-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+
+            <circle cx="12" cy="12" r="10"></circle>
+
+            <polyline points="12 6 12 12 16 14"></polyline>
+
+          </svg>
+
+          <span id="live-clock-time">--:--:-- --</span>
+
+        </div>
+
+        <button id="tgl" class="theme-toggle" type="button" aria-label="تبديل المظهر">
+
+          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+
+            <circle cx="12" cy="12" r="5"></circle>
+
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+
+          </svg>
+
+          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+
+          </svg>
+
+          <span class="theme-label">المظهر</span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+    <p>دليل ومسار تدريبي تفاعلي لمقرر CCNA R&amp;S IV — Connecting Networks · أسئلة واختبارات تفاعلية للشيتات المقررة</p>
+
+  </div>
+
+</header>
+
+<main id="app"></main>
+
+
+
+<script>
+
+// CCNAQuest Question Bank and Engine
+
+const M = (q, o, a) => ({ q, o, a });
+
+const T = (q, a) => ({ q, o: ["True", "False"], a: a ? 0 : 1, tf: 1 });
+
+const E = (q, a, desc, isCode) => ({ q, a, desc: desc || "", isCode: !!isCode });
+
+
+
+const L = [
+  {
+    "n": "Assignment 1 (شيت 1)",
+    "s": "Layer 2 MAC Addressing — Broadcast & Multicast",
+    "q": [
+      {
+        "q": "What is the standard, globally unique hexadecimal broadcast MAC address?",
+        "o": [
+          "00:00:00:00:00:00",
+          "FF:FF:FF:FF:FF:FF",
+          "01:00:5E:00:00:00",
+          "11:11:11:11:11:11"
+        ],
+        "a": 1
+      },
+      {
+        "q": "What is the Ethernet broadcast MAC address expressed in binary?",
+        "o": [
+          "48 zeroes",
+          "48 ones",
+          "24 zeroes followed by 24 ones",
+          "Alternating ones and zeroes"
+        ],
+        "a": 1
+      },
+      {
+        "q": "What type of frame is sent when an ARP Request asks \"Who has IP X.X.X.X?\"",
+        "o": [
+          "Unicast (00:00:00:00:00:00)",
+          "Broadcast (FF:FF:FF:FF:FF:FF)",
+          "IPv4 Multicast (01:00:5E:00:00:01)",
+          "IPv6 Multicast (33:33:00:00:00:01)"
+        ],
+        "a": 1
+      },
+      {
+        "q": "What does an Ethernet switch do when it receives a frame with destination MAC FF:FF:FF:FF:FF:FF?",
+        "o": [
+          "Drops the frame",
+          "Sends it back out the receiving port",
+          "Floods it out all active ports except the port it arrived on",
+          "Sends it directly to the default gateway"
+        ],
+        "a": 2
+      },
+      {
+        "q": "Which IPv4 multicast MAC address prefix is reserved by IANA?",
+        "o": [
+          "01-00-5E",
+          "01-80-C2",
+          "33-33-00",
+          "00-00-0C"
+        ],
+        "a": 0
+      },
+      {
+        "q": "Which MAC address prefix is reserved for Ethernet frames carrying IPv6 Multicast traffic?",
+        "o": [
+          "01:00:5E",
+          "01:80:C2",
+          "33:33",
+          "02:00:00"
+        ],
+        "a": 2
+      },
+      {
+        "q": "If a host wants to join an IPv6 multicast group using Neighbor Discovery, what prefix will its destination MAC address start with?",
+        "o": [
+          "01-00-5E",
+          "01-80-C2",
+          "33-33",
+          "FF-FF"
+        ],
+        "a": 2
+      }
+    ]
+  },
+  {
+    "n": "Assignment 2 (شيت 2)",
+    "s": "IPv4 Special-Purpose & Multicast Addresses",
+    "q": [
+      {
+        "q": "Which IPv4 address block is designated for loopback?",
+        "o": [
+          "10.0.0.0/8",
+          "127.0.0.0/8",
+          "169.254.0.0/16",
+          "192.168.0.0/16"
+        ],
+        "a": 1
+      },
+      {
+        "q": "Which address block is allocated for Automatic Private IP Addressing (APIPA) / Link-Local addressing?",
+        "o": [
+          "127.0.0.0/8",
+          "169.254.0.0/16",
+          "100.64.0.0/10",
+          "192.0.2.0/24"
+        ],
+        "a": 1
+      },
+      {
+        "q": "What is the exact host range of the Class B private IP address space?",
+        "o": [
+          "172.16.0.0 to 172.31.255.255",
+          "172.16.0.0 to 172.16.255.255",
+          "172.0.0.0 to 172.255.255.255",
+          "172.16.0.0 to 172.32.255.255"
+        ],
+        "a": 0
+      },
+      {
+        "q": "What primary purpose does the IP address 0.0.0.0 serve?",
+        "o": [
+          "Default gateway address",
+          "Source address when requesting an IP via DHCP",
+          "Loopback interface diagnostic testing",
+          "Multicast group subscription request"
+        ],
+        "a": 1
+      },
+      {
+        "q": "What range of IPv4 addresses is assigned to Class D for IP Multicasting?",
+        "o": [
+          "192.0.0.0 to 223.255.255.255",
+          "224.0.0.0 to 239.255.255.255",
+          "240.0.0.0 to 255.255.255.254",
+          "224.0.0.0 to 225.255.255.255"
+        ],
+        "a": 1
+      },
+      {
+        "q": "Which of the following multicast addresses sends traffic to ALL OSPF routers on a local segment?",
+        "o": [
+          "224.0.0.1",
+          "224.0.0.2",
+          "224.0.0.5",
+          "224.0.0.6"
+        ],
+        "a": 2
+      },
+      {
+        "q": "What is the designation for IPv4 address space range 240.0.0.0 to 255.255.255.254?",
+        "o": [
+          "Class D Multicast",
+          "Reserved for future use (Class E)",
+          "Carrier-Grade NAT Space",
+          "Link-Local Unicast"
+        ],
+        "a": 1
+      },
+      {
+        "q": "What happens when a packet is sent to destination address 127.0.0.1?",
+        "o": [
+          "Sent to local gateway",
+          "Processed inside the local IP stack without reaching the NIC",
+          "Broadcasted to local LAN",
+          "Dropped by NIC driver"
+        ],
+        "a": 1
+      },
+      {
+        "q": "What type of address is 192.168.1.255 on the 192.168.1.0/24 network?",
+        "o": [
+          "Broadcast address",
+          "Directed address",
+          "Multicast address",
+          "Network Identifier"
+        ],
+        "a": 0
+      },
+      {
+        "q": "Which standard IPv4 multicast address is assigned to Multicast NTP?",
+        "o": [
+          "224.0.0.251",
+          "224.0.1.1",
+          "224.0.0.13",
+          "224.0.0.9"
+        ],
+        "a": 1
+      }
+    ]
+  },
+  {
+    "n": "Assignment 3 (شيت 3)",
+    "s": "Cisco VLAN Trunking Protocol (VTP) Fundamentals",
+    "q": [
+      {
+        "q": "What is the primary purpose of Cisco VLAN Trunking Protocol (VTP)?",
+        "o": [
+          "To negotiate trunk links dynamically between switches",
+          "To synchronize VLAN configurations across switches in a management domain",
+          "To route traffic between different VLAN subnets",
+          "To assign switch ports dynamically to VLANs based on MAC addresses"
+        ],
+        "a": 1
+      },
+      {
+        "q": "Which VTP mode allows a switch to create, modify, and delete VLANs and synchronize them across the VTP domain?",
+        "o": [
+          "Client",
+          "Server",
+          "Transparent",
+          "Off"
+        ],
+        "a": 1
+      },
+      {
+        "q": "What is the default VTP mode on a factory-default Cisco Catalyst switch?",
+        "o": [
+          "Client",
+          "Server",
+          "Transparent",
+          "Off"
+        ],
+        "a": 1
+      },
+      {
+        "q": "How does a switch in VTP Transparent mode handle incoming VTP advertisements?",
+        "o": [
+          "It processes them and updates its VLAN database",
+          "It discards them immediately without forwarding",
+          "It forwards them out its trunk ports but does not update its local VLAN database",
+          "It converts them into DTP frames"
+        ],
+        "a": 2
+      },
+      {
+        "q": "Over what type of link are VTP advertisements sent between switches?",
+        "o": [
+          "Access links only",
+          "Trunk links only",
+          "Dynamic Auto ports only",
+          "Routed Layer 3 ports only"
+        ],
+        "a": 1
+      },
+      {
+        "q": "Which VLAN range is supported by VTP Versions 1 and 2?",
+        "o": [
+          "Extended VLANs (1006 - 4094)",
+          "Normal Range VLANs (1 - 1005)",
+          "Reserved VLANs only",
+          "All 4096 VLANs"
+        ],
+        "a": 1
+      },
+      {
+        "q": "Which VTP version added support for propagating Extended Range VLANs (1006 - 4094)?",
+        "o": [
+          "VTP Version 1",
+          "VTP Version 2",
+          "VTP Version 3",
+          "VTP Version 4"
+        ],
+        "a": 2
+      },
+      {
+        "q": "What feature in VTP prevents unnecessary broadcast traffic from being sent over trunk links to switches with no ports in that VLAN?",
+        "o": [
+          "VTP Pruning",
+          "VTP Dynamic Trunking",
+          "VTP Shadowing",
+          "VTP Synchronizer"
+        ],
+        "a": 0
+      },
+      {
+        "q": "Which parameter must match across switches for VTP updates to be processed if password authentication is enabled?",
+        "o": [
+          "Enable Secret Password",
+          "VTP Password",
+          "SNMP Community String",
+          "TACACS+ Key"
+        ],
+        "a": 1
+      },
+      {
+        "q": "What is the Layer 2 multicast MAC address used by VTP frame advertisements?",
+        "o": [
+          "01-00-0C-CC-CC-CC",
+          "01-80-C2-00-00-00",
+          "01-00-5E-00-00-01",
+          "FF-FF-FF-FF-FF-FF"
+        ],
+        "a": 0
+      }
+    ]
+  },
+  {
+    "n": "Assignment 4 (شيت 4)",
+    "s": "Advanced VTP Operation & 802.1Q VLAN Tagging",
+    "q": [
+      {
+        "q": "What is the destination IEEE MAC address used by Cisco VTP advertisement frames on a standard Ethernet trunk link?",
+        "o": [
+          "FFFF.FFFF.FFFF",
+          "01-00-5E-00-00-0A",
+          "01-00-0C-CC-CC-CC",
+          "01-80-C2-00-00-00"
+        ],
+        "a": 2
+      },
+      {
+        "q": "Which Layer 2 EtherType hexadecimal value identifies a standard Cisco VTP payload encapsulated inside an Ethernet II frame?",
+        "o": [
+          "0x8100",
+          "0x0800",
+          "0x2004",
+          "0x8847"
+        ],
+        "a": 2
+      },
+      {
+        "q": "When a VTP summary advertisement is sent across an 802.1Q trunk link configured with default settings, how is the frame tagged?",
+        "o": [
+          "Untagged across all switch ports",
+          "Tagged with the native VLAN ID",
+          "Tagged exclusively with VLAN 1002",
+          "Double-tagged using QinQ tunneling"
+        ],
+        "a": 0
+      },
+      {
+        "q": "Which of the following VTP packet types is responsible for requesting missing VLAN subset information when a client detects a higher revision number?",
+        "o": [
+          "VTP Summary Advertisement",
+          "VTP Subset Advertisement",
+          "VTP Advertisement Request",
+          "VTP Join-Prune Message"
+        ],
+        "a": 2
+      },
+      {
+        "q": "In VTP Version 2, what feature was introduced that was absent in VTP Version 1?",
+        "o": [
+          "Support for 4094 standard VLANs",
+          "Cryptographic MD5 password verification",
+          "Support for Token Ring VLANs and consistency checks for token ring parameters",
+          "Per-port VTP database isolation"
+        ],
+        "a": 2
+      },
+      {
+        "q": "When configuring a VTP password, how is the password string stored within the switch's running configuration and NVRAM?",
+        "o": [
+          "In clear text",
+          "As an MD5 hash of the password string embedded in VTP advertisement headers",
+          "Using Cisco Type 7 reversible encryption",
+          "Using a SHA-256 salted hash algorithm"
+        ],
+        "a": 1
+      },
+      {
+        "q": "In 802.1Q encapsulation, how many bytes are added to the original Ethernet frame to insert the VLAN Tag (TPID and TCI)?",
+        "o": [
+          "2 bytes",
+          "4 bytes",
+          "8 bytes",
+          "18 bytes"
+        ],
+        "a": 1
+      },
+      {
+        "q": "Which field within the 802.1Q Tag Control Information (TCI) contains the actual 12-bit",
+        "o": [
+          "The 3-bit Priority Code Point (PCP) field",
+          "The 1-bit Canonical Format Indicator (CFI) field",
+          "The 12-bit VID (VLAN Identifier) field",
+          "The EtherType Tag Protocol Identifier (TPID) field"
+        ],
+        "a": 2,
+        "code": "VLAN Identifier (VLAN ID)?"
+      },
+      {
+        "q": "What is the primary purpose of VTP Pruning in a switched campus network?",
+        "o": [
+          "To reduce CPU utilization on access layer switches",
+          "To encrypt VTP control frames across trunk links",
+          "To prevent unnecessary flooding of broadcast, unknown unicast, and multicast traffic across trunk links to switches that have no active ports in those VLANs",
+          "To automatically prune unused physical interfaces after 30 days of inactivity"
+        ],
+        "a": 2
+      },
+      {
+        "q": "How often does a Cisco VTP server transmit periodic VTP Summary Advertisements by default?",
+        "o": [
+          "Every 10 seconds",
+          "Every 60 seconds (1 minute)",
+          "Every 300 seconds (5 minutes)",
+          "Every 3600 seconds (1 hour)"
+        ],
+        "a": 2
+      },
+      {
+        "q": "What is a major architectural enhancement introduced in VTP Version 3 compared to",
+        "o": [
+          "Support for wireless VLAN roaming",
+          "Support for extended-range VLANs (1006–4094), per-port VTP control, and primary server authorization locking",
+          "Elimination of the VTP revision number system entirely",
+          "Replacement of MD5 hashing with RSA digital certificates"
+        ],
+        "a": 1,
+        "code": "VTP Versions 1 and 2?"
+      }
+    ]
+  }
+];
+
+const BASE_SECTIONS = L.length;
+
+document.getElementById("cnt").textContent = BASE_SECTIONS + " أقسام · " + L.reduce((s, l) => s + l.q.length, 0) + " سؤال";
+
+const app = document.getElementById("app");
+
+let best = {};
+
+try { best = JSON.parse(localStorage.getItem("ccna4_best") || "{}"); } catch(e) {}
+
+const save = () => { try { localStorage.setItem("ccna4_best", JSON.stringify(best)); } catch(e) {} };
+
+
+
+// Persistent Global Mistakes Store
+
+let globalMistakes = new Set();
+
+try {
+
+  const storedMistakes = JSON.parse(localStorage.getItem("ccna4_global_mistakes") || "[]");
+
+  if (Array.isArray(storedMistakes)) {
+
+    storedMistakes.forEach(item => {
+
+      if (typeof item === "string") globalMistakes.add(item);
+
+      else if (item && item.q) globalMistakes.add(item.q);
+
+    });
+
+  }
+
+} catch(e) {}
+
+
+
+function saveGlobalMistakes() {
+
+  try {
+
+    const list = [];
+
+    globalMistakes.forEach(qText => {
+
+      let foundLi = -1, foundQi = -1;
+
+      for (let l = 0; l < BASE_SECTIONS && l < L.length; l++) {
+
+        const idx = L[l].q.findIndex(item => item.q === qText);
+
+        if (idx !== -1) { foundLi = l; foundQi = idx; break; }
+
+      }
+
+      list.push({ q: qText, li: foundLi, qi: foundQi });
+
+    });
+
+    localStorage.setItem("ccna4_global_mistakes", JSON.stringify(list));
+
+  } catch(e) {}
+
+}
+
+
+
+function recordGlobalMistake(q) {
+
+  if (!q || !q.q) return;
+
+  globalMistakes.add(q.q);
+
+  saveGlobalMistakes();
+
+}
+
+
+
+function removeGlobalMistake(q) {
+
+  if (!q || !q.q) return;
+
+  if (globalMistakes.has(q.q)) {
+
+    globalMistakes.delete(q.q);
+
+    saveGlobalMistakes();
+
+  }
+
+}
+
+
+
+function getGlobalMistakeQuestions() {
+
+  const result = [];
+
+  const seen = new Set();
+
+  for (let l = 0; l < BASE_SECTIONS && l < L.length; l++) {
+
+    for (let qIdx = 0; qIdx < L[l].q.length; qIdx++) {
+
+      const q = L[l].q[qIdx];
+
+      if (globalMistakes.has(q.q) && !seen.has(q.q)) {
+
+        seen.add(q.q);
+
+        result.push(q);
+
+      }
+
+    }
+
+  }
+
+  return result;
+
+}
+
+
+
+// Persistent Bookmarks / Flagged Questions Store (localStorage: ccna4_bookmarks)
+
+for (let sIdx = 0; sIdx < BASE_SECTIONS && sIdx < L.length; sIdx++) {
+
+  const sec = L[sIdx];
+
+  for (let qIdx = 0; qIdx < sec.q.length; qIdx++) {
+
+    if (!sec.q[qIdx]._bmKey) sec.q[qIdx]._bmKey = `s${sIdx}_q${qIdx}`;
+
+  }
+
+}
+
+
+
+function getBookmarkKey(q) {
+
+  if (!q) return "";
+
+  if (q._bmKey) return q._bmKey;
+
+  return (q.q || "") + (q.code ? "\n[CODE]\n" + q.code : "");
+
+}
+
+
+
+let bookmarkedKeys = new Set();
+
+try {
+
+  const storedBookmarks = JSON.parse(localStorage.getItem("ccna4_bookmarks") || "[]");
+
+  if (Array.isArray(storedBookmarks)) {
+
+    storedBookmarks.forEach(item => {
+
+      if (typeof item === "string" && item) bookmarkedKeys.add(item);
+
+      else if (item && item.key) bookmarkedKeys.add(item.key);
+
+    });
+
+  }
+
+} catch(e) {}
+
+
+
+function saveBookmarks() {
+
+  try {
+
+    localStorage.setItem("ccna4_bookmarks", JSON.stringify(Array.from(bookmarkedKeys)));
+
+  } catch(e) {}
+
+}
+
+
+
+function isBookmarked(q) {
+
+  const key = getBookmarkKey(q);
+
+  return Boolean(key && bookmarkedKeys.has(key));
+
+}
+
+
+
+function toggleBookmark(q) {
+
+  const key = getBookmarkKey(q);
+
+  if (!key) return false;
+
+  if (bookmarkedKeys.has(key)) bookmarkedKeys.delete(key);
+
+  else bookmarkedKeys.add(key);
+
+  saveBookmarks();
+
+  return bookmarkedKeys.has(key);
+
+}
+
+
+
+function getBookmarkedQuestions() {
+
+  const result = [];
+
+  const seen = new Set();
+
+  for (let sIdx = 0; sIdx < BASE_SECTIONS && sIdx < L.length; sIdx++) {
+
+    const sec = L[sIdx];
+
+    for (let qIdx = 0; qIdx < sec.q.length; qIdx++) {
+
+      const item = sec.q[qIdx];
+
+      const key = getBookmarkKey(item);
+
+      if (bookmarkedKeys.has(key) && !seen.has(key)) {
+
+        seen.add(key);
+
+        result.push(Object.assign({}, item, {
+
+          _bmKey: key,
+
+          _sourceName: sec.n,
+
+          _sourceColor: acs[sIdx] || "var(--primary)",
+
+          _isEssay: Boolean(sec.essay),
+
+          _isCode: Boolean(item.isCode || sec.isCode)
+
+        }));
+
+      }
+
+    }
+
+  }
+
+  return result;
+
+}
+
+
+
+function renderBookmarkBtnHtml(q) {
+
+  const active = isBookmarked(q);
+
+  return `<button type="button" class="btn-bookmark${active ? " active" : ""}" id="btn-bookmark" aria-pressed="${active ? "true" : "false"}" title="${active ? "إزالة من الأسئلة المعلّمة للمراجعة" : "علّم هذا السؤال للمراجعة لاحقاً"}">${active ? "⭐ مُعلّم للمراجعة" : "☆ علّم للمراجعة"}</button>`;
+
+}
+
+
+
+function bindBookmarkBtn(q) {
+
+  const btn = document.getElementById("btn-bookmark");
+
+  if (!btn) return;
+
+  btn.onclick = () => {
+
+    const nowActive = toggleBookmark(q);
+
+    btn.classList.toggle("active", nowActive);
+
+    btn.setAttribute("aria-pressed", nowActive ? "true" : "false");
+
+    btn.title = nowActive ? "إزالة من الأسئلة المعلّمة للمراجعة" : "علّم هذا السؤال للمراجعة لاحقاً";
+
+    btn.textContent = nowActive ? "⭐ مُعلّم للمراجعة" : "☆ علّم للمراجعة";
+
+  };
+
+}
+
+
+
+function showBookmarksEmptyState() {
+
+  stopTimerInterval();
+
+  timerRunning = false;
+
+  app.style.setProperty("--ac", "var(--gold)");
+
+  app.innerHTML = `
+
+    <div class="bar">
+
+      <span class="tag">⭐ الأسئلة المعلّمة للمراجعة</span>
+
+      <div class="mid"></div>
+
+      <button class="link" id="back">الرجوع للأقسام</button>
+
+    </div>
+
+    <div class="q bookmarks-empty">
+
+      <div class="empty-icon">☆</div>
+
+      <h2>لا توجد أسئلة معلّمة للمراجعة حتى الآن</h2>
+
+      <p>اضغط على زر <b>«☆ علّم للمراجعة»</b> أعلى أي سؤال أثناء الحل أو المراجعة لإضافته هنا ومراجعته في جلسة مخصصة لاحقاً.</p>
+
+      <button type="button" class="btn" id="empty-back">الرجوع إلى الصفحة الرئيسية</button>
+
+    </div>`;
+
+  document.getElementById("back").onclick = home;
+
+  document.getElementById("empty-back").onclick = home;
+
+  scrollTo(0, 0);
+
+}
+
+
+
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+
+
+
+const icons = ["🌐", "📡", "🔀", "🏷️"];
+
+const acs = ["#23A095", "#4C8DD9", "#8A7BE0", "#E8954F"];
+
+const RM = matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+
+
+const ART = [
+  // 0: Ethernet Frames & MAC Addressing
+  '<svg viewBox="0 0 200 110"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="24" y="28" width="152" height="44" rx="8" fill="currentColor" opacity=".1"/><rect x="24" y="28" width="152" height="44" rx="8"/><line x1="66" y1="28" x2="66" y2="72"/><line x1="112" y1="28" x2="112" y2="72"/><line x1="148" y1="28" x2="148" y2="72"/><circle cx="45" cy="92" r="5"/><circle cx="100" cy="92" r="5"/><circle cx="155" cy="92" r="5"/><line x1="50" y1="92" x2="95" y2="92"/><line x1="105" y1="92" x2="150" y2="92"/><text x="45" y="54" text-anchor="middle" font-size="10" font-family="monospace" fill="currentColor" stroke="none">DST</text><text x="89" y="54" text-anchor="middle" font-size="10" font-family="monospace" fill="currentColor" stroke="none">SRC</text><text x="130" y="54" text-anchor="middle" font-size="10" font-family="monospace" fill="currentColor" stroke="none">DATA</text><text x="162" y="54" text-anchor="middle" font-size="9" font-family="monospace" fill="currentColor" stroke="none">FCS</text></g></svg>',
+  // 1: IPv4 Addressing & Multicast Routing
+  '<svg viewBox="0 0 200 110"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="100" cy="55" r="24" fill="currentColor" opacity=".12"/><circle cx="100" cy="55" r="24"/><path d="M88 55h24M100 43v24"/><path d="M107 49l5 6-5 6M93 61l-5-6 5-6"/><circle cx="38" cy="30" r="9"/><circle cx="162" cy="30" r="9"/><circle cx="38" cy="82" r="9"/><circle cx="162" cy="82" r="9"/><line x1="46" y1="34" x2="79" y2="46"/><line x1="154" y1="34" x2="121" y2="46"/><line x1="46" y1="78" x2="79" y2="64"/><line x1="154" y1="78" x2="121" y2="64"/></g></svg>',
+  // 2: Cisco VTP Switch Domain Synchronization
+  '<svg viewBox="0 0 200 110"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="74" y="16" width="52" height="24" rx="5" fill="currentColor" opacity=".14"/><rect x="74" y="16" width="52" height="24" rx="5"/><rect x="26" y="70" width="48" height="24" rx="5"/><rect x="126" y="70" width="48" height="24" rx="5"/><path d="M88 40L56 70M112 40L144 70M74 82h52"/><text x="100" y="32" text-anchor="middle" font-size="10" font-family="monospace" fill="currentColor" stroke="none">VTP</text><text x="50" y="86" text-anchor="middle" font-size="9" font-family="monospace" fill="currentColor" stroke="none">SW-A</text><text x="150" y="86" text-anchor="middle" font-size="9" font-family="monospace" fill="currentColor" stroke="none">SW-B</text></g></svg>',
+  // 3: 802.1Q VLAN Tagging & Advanced VTP
+  '<svg viewBox="0 0 200 110"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="20" y="34" width="160" height="42" rx="7"/><rect x="78" y="34" width="46" height="42" fill="currentColor" opacity=".18"/><line x1="78" y1="34" x2="78" y2="76"/><line x1="124" y1="34" x2="124" y2="76"/><text x="49" y="59" text-anchor="middle" font-size="10" font-family="monospace" fill="currentColor" stroke="none">MAC</text><text x="101" y="52" text-anchor="middle" font-size="9" font-family="monospace" fill="currentColor" stroke="none">802.1Q</text><text x="101" y="65" text-anchor="middle" font-size="9" font-family="monospace" fill="currentColor" stroke="none">4B TAG</text><text x="152" y="59" text-anchor="middle" font-size="10" font-family="monospace" fill="currentColor" stroke="none">TYPE</text></g></svg>'
+];
+
+
+
+function confetti(x, y, n) {
+
+  const cs = ["#00FF9D", "#5ED6C1", "#23A095", "#8A7BE0", "#FF9F43"];
+
+  for (let i = 0; i < n; i++) {
+
+    const d = document.createElement("i");
+
+    d.className = "fx";
+
+    d.style.background = cs[i % 5];
+
+    document.body.appendChild(d);
+
+    const a = Math.random() * 6.283, v = 80 + Math.random() * 170;
+
+    d.animate([
+
+      { transform: `translate(${x}px,${y}px) scale(1)`, opacity: 1 },
+
+      { transform: `translate(${x + Math.cos(a) * v}px,${y + Math.sin(a) * v + 90}px) rotate(${Math.random() * 540}deg) scale(.4)`, opacity: 0 }
+
+    ], { duration: 900 + Math.random() * 500, easing: "cubic-bezier(.2,.8,.3,1)" }).onfinish = () => d.remove();
+
+  }
+
+}
+
+
+
+let li, qi, log = [], wq = [], userAnswers = {};
+
+
+
+// ==================== Live Digital Clock ====================
+
+function updateLiveClock() {
+
+  const el = document.getElementById("live-clock-time");
+
+  if (!el) return;
+
+  const now = new Date();
+
+  let hours = now.getHours();
+
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+
+  const seconds = String(now.getSeconds()).padStart(2, "0");
+
+  const ampm = hours >= 12 ? "PM" : "AM";
+
+  hours = hours % 12;
+
+  hours = hours ? hours : 12;
+
+  const strHours = String(hours).padStart(2, "0");
+
+  el.textContent = `${strHours}:${minutes}:${seconds} ${ampm}`;
+
+}
+
+
+
+// ==================== Interactive Exam Timer & Stopwatch ====================
+
+let timerMode = "stopwatch"; // "stopwatch" | "countdown"
+
+let timerRunning = false;
+
+let stopwatchSeconds = 0;
+
+let countdownTotal = 1200; // default 20 minutes in seconds
+
+let countdownRemaining = 1200;
+
+let timerIntervalId = null;
+
+let timerAlertDismissed = false;
+
+
+
+function formatTimerDigits(totalSeconds) {
+
+  const s = Math.max(0, Math.floor(totalSeconds));
+
+  const hrs = Math.floor(s / 3600);
+
+  const mins = Math.floor((s % 3600) / 60);
+
+  const secs = s % 60;
+
+  if (hrs > 0) {
+
+    return `${String(hrs).padStart(2, "0")}:${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+
+  }
+
+  return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+
+}
+
+
+
+function formatTimerArabic(totalSeconds) {
+
+  const s = Math.max(0, Math.floor(totalSeconds));
+
+  const hrs = Math.floor(s / 3600);
+
+  const mins = Math.floor((s % 3600) / 60);
+
+  const secs = s % 60;
+
+  const parts = [];
+
+  if (hrs > 0) parts.push(`${hrs} ساعة`);
+
+  if (mins > 0) parts.push(`${mins} دقيقة`);
+
+  if (secs > 0 || parts.length === 0) parts.push(`${secs} ثانية`);
+
+  return parts.join(" و ");
+
+}
+
+
+
+function getFormattedCurrentTimer() {
+
+  if (timerMode === "countdown") {
+
+    return formatTimerDigits(countdownRemaining);
+
+  }
+
+  return formatTimerDigits(stopwatchSeconds);
+
+}
+
+
+
+function playTimerBeep() {
+
+  try {
+
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+
+    if (!AudioContext) return;
+
+    const ctx = new AudioContext();
+
+    if (ctx.state === "suspended") {
+
+      ctx.resume();
+
+    }
+
+    const t = ctx.currentTime;
+
+    // Tone 1: Gentle pleasant chime (587.33 Hz - D5)
+
+    const o1 = ctx.createOscillator();
+
+    const g1 = ctx.createGain();
+
+    o1.type = "sine";
+
+    o1.frequency.setValueAtTime(587.33, t);
+
+    g1.gain.setValueAtTime(0.12, t);
+
+    g1.gain.exponentialRampToValueAtTime(0.0001, t + 0.35);
+
+    o1.connect(g1);
+
+    g1.connect(ctx.destination);
+
+    o1.start(t);
+
+    o1.stop(t + 0.35);
+
+
+
+    // Tone 2: Ascending warm chime (880 Hz - A5)
+
+    const o2 = ctx.createOscillator();
+
+    const g2 = ctx.createGain();
+
+    o2.type = "sine";
+
+    o2.frequency.setValueAtTime(880, t + 0.18);
+
+    g2.gain.setValueAtTime(0.14, t + 0.18);
+
+    g2.gain.exponentialRampToValueAtTime(0.0001, t + 0.65);
+
+    o2.connect(g2);
+
+    g2.connect(ctx.destination);
+
+    o2.start(t + 0.18);
+
+    o2.stop(t + 0.65);
+
+  } catch (err) {
+
+    // Graceful fallback if AudioContext is not permitted
+
+  }
+
+}
+
+
+
+function startTimerInterval() {
+
+  if (timerIntervalId) clearInterval(timerIntervalId);
+
+  timerIntervalId = setInterval(tickTimer, 1000);
+
+}
+
+
+
+function stopTimerInterval() {
+
+  if (timerIntervalId) {
+
+    clearInterval(timerIntervalId);
+
+    timerIntervalId = null;
+
+  }
+
+}
+
+
+
+function tickTimer() {
+
+  if (!timerRunning) return;
+
+  
+
+  stopwatchSeconds++;
+
+  
+
+  if (timerMode === "countdown") {
+
+    if (countdownRemaining > 0) {
+
+      countdownRemaining--;
+
+      if (countdownRemaining === 0) {
+
+        timerRunning = false;
+
+        playTimerBeep();
+
+        showTimerAlertBanner();
+
+      }
+
+    }
+
+  }
+
+  
+
+  updateTimerDisplayDOM();
+
+}
+
+
+
+function updateTimerDisplayDOM() {
+
+  const display = document.getElementById("timer-display");
+
+  if (display) {
+
+    display.textContent = getFormattedCurrentTimer();
+
+  }
+
+  const widget = document.getElementById("exam-timer-widget");
+
+  if (widget) {
+
+    if (timerMode === "countdown" && countdownRemaining <= 60 && countdownRemaining > 0) {
+
+      widget.classList.add("warning");
+
+    } else {
+
+      widget.classList.remove("warning");
+
+    }
+
+  }
+
+}
+
+
+
+function initTimerForSection() {
+
+  stopwatchSeconds = 0;
+
+  if (timerMode === "countdown") {
+
+    countdownRemaining = countdownTotal;
+
+  }
+
+  timerRunning = true;
+
+  timerAlertDismissed = false;
+
+  startTimerInterval();
+
+}
+
+
+
+function getTimerWidgetInnerHtml() {
+
+  return `
+
+    <div class="timer-main-row">
+
+      <div class="timer-mode-pills" role="radiogroup" aria-label="نمط العداد">
+
+        <button type="button" class="timer-mode-btn ${timerMode === 'stopwatch' ? 'active' : ''}" id="timer-mode-stopwatch" title="عدّاد تصاعدي">⏱️ تصاعدي</button>
+
+        <button type="button" class="timer-mode-btn ${timerMode === 'countdown' ? 'active' : ''}" id="timer-mode-countdown" title="مؤقت امتحان تنازلي">⏳ تنازلي</button>
+
+      </div>
+
+      <div class="timer-core">
+
+        <span class="timer-digits font-code" id="timer-display" aria-live="polite">${getFormattedCurrentTimer()}</span>
+
+        <div class="timer-actions">
+
+          <button type="button" class="timer-action-btn" id="timer-toggle-btn" title="${timerRunning ? 'إيقاف مؤقت' : 'تشغيل'}" aria-label="${timerRunning ? 'إيقاف مؤقت' : 'تشغيل'}">${timerRunning ? '⏸' : '▶'}</button>
+
+          <button type="button" class="timer-action-btn" id="timer-reset-btn" title="إعادة ضبط" aria-label="إعادة ضبط">↺</button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    ${timerMode === 'countdown' ? `
+
+    <div class="timer-presets" id="timer-presets">
+
+      <span class="timer-presets-label">المدة:</span>
+
+      <button type="button" class="timer-preset-btn ${countdownTotal === 600 ? 'active' : ''}" data-mins="10">10د</button>
+
+      <button type="button" class="timer-preset-btn ${countdownTotal === 1200 ? 'active' : ''}" data-mins="20">20د</button>
+
+      <button type="button" class="timer-preset-btn ${countdownTotal === 1800 ? 'active' : ''}" data-mins="30">30د</button>
+
+      <button type="button" class="timer-preset-btn ${![600, 1200, 1800].includes(countdownTotal) ? 'active' : ''}" id="timer-custom-btn" title="تحديد مدة مخصصة بالدقائق">⚙️ مخصص</button>
+
+    </div>` : ''}
+
+  `;
+
+}
+
+
+
+function renderTimerWidget() {
+
+  const isWarn = timerMode === 'countdown' && countdownRemaining <= 60 && countdownRemaining > 0;
+
+  return `<div class="exam-timer-widget ${isWarn ? 'warning' : ''}" id="exam-timer-widget">${getTimerWidgetInnerHtml()}</div>`;
+
+}
+
+
+
+function renderTimeoutBannerHtml() {
+
+  return `
+
+    <div class="timer-alert-banner" id="timer-alert-banner" role="alert">
+
+      <div class="timer-alert-info">
+
+        <span class="timer-alert-icon">⏰</span>
+
+        <div>
+
+          <b class="timer-alert-title">انتهى الوقت! ⏰</b>
+
+          <p class="timer-alert-msg">انتهت مدة الامتحان المحددة. يمكنك إنهاء الاختبار وتسليم إجاباتك الآن أو متابعة المراجعة وحل بقية الأسئلة.</p>
+
+        </div>
+
+      </div>
+
+      <div class="timer-alert-actions">
+
+        <button type="button" class="btn-timer-alert ok" id="banner-submit-btn">إنهاء وتسليم الاختبار 🏁</button>
+
+        <button type="button" class="btn-timer-alert alt" id="banner-dismiss-btn">متابعة المراجعة ✍️</button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+
+function renderTimeoutBanner() {
+
+  if (timerMode === "countdown" && countdownRemaining === 0 && !timerAlertDismissed) {
+
+    return renderTimeoutBannerHtml();
+
+  }
+
+  return "";
+
+}
+
+
+
+function showTimerAlertBanner() {
+
+  const container = document.getElementById("exam-timer-banner-container");
+
+  if (container) {
+
+    container.innerHTML = renderTimeoutBannerHtml();
+
+    attachBannerListeners();
+
+  }
+
+}
+
+
+
+function attachBannerListeners() {
+
+  const submitBtn = document.getElementById("banner-submit-btn");
+
+  if (submitBtn) {
+
+    submitBtn.onclick = () => {
+
+      if (li !== undefined && L[li] && L[li].essay) finishEssay();
+
+      else finish();
+
+    };
+
+  }
+
+  const dismissBtn = document.getElementById("banner-dismiss-btn");
+
+  if (dismissBtn) {
+
+    dismissBtn.onclick = () => {
+
+      timerAlertDismissed = true;
+
+      const container = document.getElementById("exam-timer-banner-container");
+
+      if (container) container.innerHTML = "";
+
+    };
+
+  }
+
+}
+
+
+
+function refreshTimerWidgetDOM() {
+
+  const widget = document.getElementById("exam-timer-widget");
+
+  if (!widget) return;
+
+  const isWarn = timerMode === "countdown" && countdownRemaining <= 60 && countdownRemaining > 0;
+
+  widget.className = `exam-timer-widget ${isWarn ? "warning" : ""}`;
+
+  widget.innerHTML = getTimerWidgetInnerHtml();
+
+  attachTimerWidgetEvents();
+
+}
+
+
+
+function attachTimerWidgetEvents() {
+
+  const btnStopwatch = document.getElementById("timer-mode-stopwatch");
+
+  if (btnStopwatch) {
+
+    btnStopwatch.onclick = () => {
+
+      timerMode = "stopwatch";
+
+      refreshTimerWidgetDOM();
+
+    };
+
+  }
+
+  const btnCountdown = document.getElementById("timer-mode-countdown");
+
+  if (btnCountdown) {
+
+    btnCountdown.onclick = () => {
+
+      timerMode = "countdown";
+
+      if (countdownRemaining <= 0) {
+
+        countdownRemaining = countdownTotal;
+
+        timerAlertDismissed = false;
+
+      }
+
+      refreshTimerWidgetDOM();
+
+    };
+
+  }
+
+  const toggleBtn = document.getElementById("timer-toggle-btn");
+
+  if (toggleBtn) {
+
+    toggleBtn.onclick = () => {
+
+      timerRunning = !timerRunning;
+
+      if (timerRunning) {
+
+        startTimerInterval();
+
+      }
+
+      refreshTimerWidgetDOM();
+
+    };
+
+  }
+
+  const resetBtn = document.getElementById("timer-reset-btn");
+
+  if (resetBtn) {
+
+    resetBtn.onclick = () => {
+
+      if (timerMode === "countdown") {
+
+        countdownRemaining = countdownTotal;
+
+        timerAlertDismissed = false;
+
+        const bannerContainer = document.getElementById("exam-timer-banner-container");
+
+        if (bannerContainer) bannerContainer.innerHTML = "";
+
+      } else {
+
+        stopwatchSeconds = 0;
+
+      }
+
+      refreshTimerWidgetDOM();
+
+    };
+
+  }
+
+  document.querySelectorAll(".timer-preset-btn[data-mins]").forEach(btn => {
+
+    btn.onclick = () => {
+
+      const mins = +btn.dataset.mins;
+
+      countdownTotal = mins * 60;
+
+      countdownRemaining = countdownTotal;
+
+      timerAlertDismissed = false;
+
+      timerRunning = true;
+
+      const bannerContainer = document.getElementById("exam-timer-banner-container");
+
+      if (bannerContainer) bannerContainer.innerHTML = "";
+
+      startTimerInterval();
+
+      refreshTimerWidgetDOM();
+
+    };
+
+  });
+
+  const customBtn = document.getElementById("timer-custom-btn");
+
+  if (customBtn) {
+
+    customBtn.onclick = () => {
+
+      const currentMins = Math.round(countdownTotal / 60);
+
+      const val = prompt("أدخل مدة الامتحان بالدقائق (مثلاً: 15):", currentMins);
+
+      if (val !== null) {
+
+        const mins = parseInt(val, 10);
+
+        if (!isNaN(mins) && mins > 0 && mins <= 360) {
+
+          countdownTotal = mins * 60;
+
+          countdownRemaining = countdownTotal;
+
+          timerAlertDismissed = false;
+
+          timerRunning = true;
+
+          const bannerContainer = document.getElementById("exam-timer-banner-container");
+
+          if (bannerContainer) bannerContainer.innerHTML = "";
+
+          startTimerInterval();
+
+          refreshTimerWidgetDOM();
+
+        }
+
+      }
+
+    };
+
+  }
+
+}
+
+
+
+function attachTimerListeners() {
+
+  attachTimerWidgetEvents();
+
+  attachBannerListeners();
+
+}
+
+
+
+
+
+// Instant Global Search & Keyword Filter
+
+let lastSearchQuery = "";
+
+
+
+function searchAllQuestions(rawQuery) {
+
+  const query = String(rawQuery || "").trim().toLowerCase();
+
+  if (!query) return [];
+
+  const matches = [];
+
+  for (let sIdx = 0; sIdx < BASE_SECTIONS && sIdx < L.length; sIdx++) {
+
+    const sec = L[sIdx];
+
+    for (let qIdx = 0; qIdx < sec.q.length; qIdx++) {
+
+      const item = sec.q[qIdx];
+
+      const parts = [
+
+        item.q || "",
+
+        item.code || "",
+
+        Array.isArray(item.o) ? item.o.join("\n") : "",
+
+        typeof item.a === "string" ? item.a : "",
+
+        item.desc || ""
+
+      ];
+
+      if (parts.join("\n").toLowerCase().includes(query)) {
+
+        matches.push(Object.assign({}, item, {
+
+          _sourceName: sec.n,
+
+          _sourceColor: acs[sIdx] || "var(--primary)",
+
+          _isEssay: Boolean(sec.essay),
+
+          _isCode: Boolean(item.isCode || sec.isCode)
+
+        }));
+
+      }
+
+    }
+
+  }
+
+  return matches;
+
+}
+
+
+
+function launchSearchSession(queryText, matches, startIndex) {
+
+  if (!matches || !matches.length) return;
+
+  const cleanQuery = String(queryText || "").trim();
+
+  while (L.length > BASE_SECTIONS) L.pop();
+
+  L.push({
+
+    n: `🔍 بحث: "${esc(cleanQuery)}"`,
+
+    s: `Search Results (${matches.length} سؤال)`,
+
+    isSearch: true,
+
+    q: matches
+
+  });
+
+  start(L.length - 1);
+
+  if (typeof startIndex === "number" && startIndex > 0 && startIndex < matches.length) {
+
+    qi = startIndex;
+
+    show();
+
+  }
+
+}
+
+
+
+function home() {
+
+  stopTimerInterval();
+
+  timerRunning = false;
+
+  app.style.removeProperty("--ac");
+
+  while (L.length > BASE_SECTIONS) L.pop();
+
+  const cntEl = document.getElementById("cnt");
+
+  if (cntEl) cntEl.textContent = BASE_SECTIONS + " أقسام · " + L.reduce((s, l) => s + l.q.length, 0) + " سؤال";
+
+  
+
+  const mistakeList = getGlobalMistakeQuestions();
+
+  const mistakesCount = mistakeList.length;
+
+  const totalAllQuestions = L.reduce((s, l) => s + l.q.length, 0);
+
+  const bookmarkList = getBookmarkedQuestions();
+
+  const bookmarksCount = bookmarkList.length;
+
+
+
+  app.innerHTML = `
+
+    <section class="global-search-wrap" aria-label="البحث الشامل في الأسئلة">
+
+      <div class="global-search-row">
+
+        <div class="search-input-wrap">
+
+          <input type="search" id="global-search-input" class="global-search-input" autocomplete="off" spellcheck="false" placeholder="🔍 ابحث في كل الأسئلة والأوامر... مثلاً: MAC, OSPF, VTP, 802.1Q, APIPA" aria-label="ابحث في كل الأسئلة والأكواد">
+
+          <button type="button" id="global-search-clear" class="search-clear-btn" aria-label="مسح البحث" title="مسح البحث" hidden>✕</button>
+
+        </div>
+
+        <div class="search-controls">
+
+          <span id="global-search-count" class="search-count-badge" role="status" aria-live="polite" hidden></span>
+
+          <button type="button" id="global-search-launch" class="btn search-launch-btn" hidden>▶ ابدأ مراجعة نتائج البحث</button>
+
+        </div>
+
+      </div>
+
+      <div id="global-search-preview" class="search-preview" hidden></div>
+
+    </section>
+
+  ` + '<div class="grid">' + `
+
+    <button type="button" class="lec all-bank-card" id="all-bank" style="--ac:var(--primary);--d:0ms">
+
+      <div class="art">
+
+        <svg viewBox="0 0 200 110"><g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M40 34l60-18 60 18-60 18z" fill="currentColor" opacity=".14"/><path d="M40 34l60-18 60 18-60 18z"/><path d="M40 55l60 18 60-18"/><path d="M40 76l60 18 60-18"/></g><circle cx="100" cy="34" r="3.5" fill="currentColor"/></svg>
+
+      </div>
+
+      <div class="ring" style="--p:100">
+
+        <div class="badge">📚</div>
+
+      </div>
+
+      <div>
+
+        <b>📚 بنك الأسئلة الشامل (كل الشيتات)</b>
+
+        <span>All Questions Combined — Complete Question Bank</span>
+
+        <small>${totalAllQuestions} سؤال · جميع أسئلة CCNA R&amp;S IV مجمّعة بالترتيب في مكان واحد (كل الشيتات الأربعة)</small>
+
+        <i class="mini"><b style="width:100%"></b></i>
+
+      </div>
+
+    </button>` + L.map((l, i) => {
+
+    const p = best[i] != null ? Math.round((best[i] / l.q.length) * 100) : 0;
+
+    return `<button class="lec" data-i="${i}" style="--ac:${acs[i] || "var(--primary)"};--d:${i * 80}ms">
+
+      <div class="art">${ART[i] || ""}</div>
+
+      <div class="ring" style="--p:${p}">
+
+        <div class="badge">${icons[i] || (i + 1)}</div>
+
+      </div>
+
+      <div>
+
+        <b>${l.n}</b>
+
+        <span>${esc(l.s)}</span>
+
+        <small>${l.q.length} ${l.isCode ? "تمرين برمجي" : (l.essay ? "سؤال مقالي" : "سؤال")}${best[i] != null ? " · " + (l.essay ? "تمت مراجعتها" : "أفضل نتيجة " + best[i] + "/" + l.q.length) : ""}</small>
+
+        <i class="mini"><b style="width:${p}%"></b></i>
+
+      </div>
+
+    </button>`;
+
+  }).join("") + `
+
+    <div class="lec bookmarks-card ${bookmarksCount > 0 ? "has-bookmarks" : "empty"}" id="bookmarks-card" role="button" tabindex="0" style="--ac:var(--gold);--d:${BASE_SECTIONS * 80}ms">
+
+      <div class="art">
+
+        <svg viewBox="0 0 200 110"><g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M100 18l11 23 25 3.6-18 17.5 4.3 25L100 75.3 77.7 87.1 82 62.1 64 44.6 89 41z" fill="currentColor" opacity=".18"/><path d="M100 18l11 23 25 3.6-18 17.5 4.3 25L100 75.3 77.7 87.1 82 62.1 64 44.6 89 41z"/></g></svg>
+
+      </div>
+
+      <div class="ring" style="--p:${bookmarksCount > 0 ? 100 : 0}">
+
+        <div class="badge">${bookmarksCount > 0 ? "⭐" : "☆"}</div>
+
+      </div>
+
+      <div style="flex:1;min-width:0;padding-inline-end:16px;">
+
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+
+          <b>⭐ الأسئلة المعلّمة للمراجعة (المفضلة)</b>
+
+          ${bookmarksCount > 0 ? '<button type="button" class="btn-clear-bookmarks" id="btn-clear-bookmarks" title="مسح جميع الأسئلة المعلّمة">مسح المفضلة 🗑️</button>' : ''}
+
+        </div>
+
+        <span>Bookmarked Questions — Flagged for Review</span>
+
+        <small>${bookmarksCount > 0 ? `${bookmarksCount} سؤال معلّم للمراجعة · اضغط لبدء جلسة المراجعة المركزة` : "0 سؤال معلّم للمراجعة · لا توجد أسئلة معلّمة بعد، اضغط زر «☆ علّم للمراجعة» داخل أي سؤال"}</small>
+
+        ${bookmarksCount > 0 ? `<i class="mini"><b style="width:100%;background:var(--gold)!important"></b></i>` : ""}
+
+      </div>
+
+    </div>
+
+    <div class="lec mistakes-card ${mistakesCount > 0 ? "has-mistakes" : "empty"}" id="mistakes-card" role="button" tabindex="${mistakesCount > 0 ? "0" : "-1"}" style="--ac:var(--bad);--d:${(BASE_SECTIONS + 1) * 80}ms">
+
+      <div class="art">
+
+        <svg viewBox="0 0 200 110"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="100" cy="55" r="38"/><circle cx="100" cy="55" r="24"/><circle cx="100" cy="55" r="10"/><path d="M100 12v8M100 90v8M57 55h8M135 55h8"/></g><circle cx="100" cy="55" r="4" fill="currentColor"/></svg>
+
+      </div>
+
+      <div class="ring" style="--p:${mistakesCount > 0 ? 100 : 0}">
+
+        <div class="badge">${mistakesCount > 0 ? "🎯" : "🎉"}</div>
+
+      </div>
+
+      <div style="flex:1;min-width:0;padding-inline-end:16px;">
+
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+
+          <b>مراجعة كل الأخطاء 🎯</b>
+
+          ${mistakesCount > 0 ? '<button type="button" class="btn-clear-mistakes" id="btn-clear-mistakes" title="مسح سجل الأخطاء">مسح السجل 🗑️</button>' : ''}
+
+        </div>
+
+        <span>All Mistakes Review</span>
+
+        <small>${mistakesCount > 0 ? `${mistakesCount} سؤال غلط من كل المحاضرات · اضغط لتصفيتها` : "مفيش أخطاء حالياً 🎉 · أداؤك ممتاز في كل الأقسام!"}</small>
+
+        ${mistakesCount > 0 ? `<i class="mini"><b style="width:100%;background:var(--bad)!important"></b></i>` : ""}
+
+      </div>
+
+    </div>
+
+    <button class="lec boss" id="boss" style="--ac:#E8954F;--d:${(BASE_SECTIONS + 1) * 80}ms">
+
+      <div class="art">${ART[7]}</div>
+
+      <div class="ring" style="--p:100"><div class="badge">🏆</div></div>
+
+      <div>
+
+        <b>التحدي الشامل ⚡</b>
+
+        <span>Mixed Challenge</span>
+
+        <small>20 سؤال عشوائي من كل الشيتات والمحاضرات</small>
+
+      </div>
+
+    </button>
+
+  </div>`;
+
+  
+
+  app.querySelectorAll(".lec:not(.boss):not(.mistakes-card):not(.all-bank-card):not(.bookmarks-card)").forEach(b => b.onclick = () => start(+b.dataset.i));
+
+
+
+  const allBankBtn = document.getElementById("all-bank");
+
+  if (allBankBtn) {
+
+    allBankBtn.onclick = () => {
+
+      const combinedQuestions = [];
+
+      for (let sIdx = 0; sIdx < BASE_SECTIONS && sIdx < L.length; sIdx++) {
+
+        const sec = L[sIdx];
+
+        for (let qIdx = 0; qIdx < sec.q.length; qIdx++) {
+
+          const item = sec.q[qIdx];
+
+          combinedQuestions.push(Object.assign({}, item, {
+
+            _sourceName: sec.n,
+
+            _sourceColor: acs[sIdx] || "var(--primary)",
+
+            _isEssay: Boolean(sec.essay),
+
+            _isCode: Boolean(item.isCode || sec.isCode)
+
+          }));
+
+        }
+
+      }
+
+      L.push({
+
+        n: "بنك الأسئلة الشامل",
+
+        s: "All Questions Combined — Complete Question Bank",
+
+        combined: true,
+
+        q: combinedQuestions
+
+      });
+
+      start(L.length - 1);
+
+    };
+
+  }
+
+
+
+  const bookmarksCard = document.getElementById("bookmarks-card");
+
+  if (bookmarksCard) {
+
+    const launchBookmarks = () => {
+
+      const qs = getBookmarkedQuestions();
+
+      if (!qs.length) {
+
+        showBookmarksEmptyState();
+
+        return;
+
+      }
+
+      L.push({
+
+        n: "⭐ الأسئلة المعلّمة للمراجعة",
+
+        s: "Bookmarked Questions (" + qs.length + " سؤال)",
+
+        bookmarks: true,
+
+        q: qs
+
+      });
+
+      start(L.length - 1);
+
+    };
+
+    bookmarksCard.onclick = (e) => {
+
+      if (e.target && e.target.closest("#btn-clear-bookmarks")) return;
+
+      launchBookmarks();
+
+    };
+
+    bookmarksCard.onkeydown = (e) => {
+
+      if (e.key === "Enter" || e.key === " ") {
+
+        e.preventDefault();
+
+        launchBookmarks();
+
+      }
+
+    };
+
+  }
+
+
+
+  const btnClearBookmarks = document.getElementById("btn-clear-bookmarks");
+
+  if (btnClearBookmarks) {
+
+    btnClearBookmarks.onclick = (e) => {
+
+      e.stopPropagation();
+
+      if (confirm("هل تريد بالتأكيد مسح جميع الأسئلة المعلّمة للمراجعة؟")) {
+
+        bookmarkedKeys.clear();
+
+        saveBookmarks();
+
+        home();
+
+      }
+
+    };
+
+  }
+
+
+
+  const mistakeCard = document.getElementById("mistakes-card");
+
+  if (mistakeCard && mistakesCount > 0) {
+
+    const launchMistakes = () => {
+
+      const qs = getGlobalMistakeQuestions();
+
+      if (!qs.length) return;
+
+      L.push({ n: "بنك الأخطاء الشامل", s: "All Mistakes Review (" + qs.length + " سؤال)", q: qs });
+
+      start(L.length - 1);
+
+    };
+
+    mistakeCard.onclick = (e) => {
+
+      if (e.target && e.target.closest("#btn-clear-mistakes")) return;
+
+      launchMistakes();
+
+    };
+
+    mistakeCard.onkeydown = (e) => {
+
+      if (e.key === "Enter" || e.key === " ") {
+
+        e.preventDefault();
+
+        launchMistakes();
+
+      }
+
+    };
+
+  }
+
+
+
+  const btnClear = document.getElementById("btn-clear-mistakes");
+
+  if (btnClear) {
+
+    btnClear.onclick = (e) => {
+
+      e.stopPropagation();
+
+      if (confirm("هل تريد بالتأكيد مسح وتفريغ سجل جميع الأخطاء المتراكمة؟")) {
+
+        globalMistakes.clear();
+
+        saveGlobalMistakes();
+
+        home();
+
+      }
+
+    };
+
+  }
+
+
+
+  document.getElementById("boss").onclick = () => {
+
+    const pool = L.filter(l => !l.essay).flatMap(l => l.q).sort(() => Math.random() - .5).slice(0, 20);
+
+    L.push({ n: "التحدي الشامل", s: "Mixed Challenge", q: pool });
+
+    start(L.length - 1);
+
+  };
+
+
+
+  // Global Search Bar Wiring
+
+  const searchInput = document.getElementById("global-search-input");
+
+  const searchClear = document.getElementById("global-search-clear");
+
+  const searchCount = document.getElementById("global-search-count");
+
+  const searchLaunch = document.getElementById("global-search-launch");
+
+  const searchPreview = document.getElementById("global-search-preview");
+
+  let currentSearchMatches = [];
+
+
+
+  function updateGlobalSearch() {
+
+    if (!searchInput) return;
+
+    const rawVal = searchInput.value;
+
+    lastSearchQuery = rawVal;
+
+    const trimmed = rawVal.trim();
+
+    if (searchClear) searchClear.hidden = rawVal.length === 0;
+
+    if (!trimmed) {
+
+      currentSearchMatches = [];
+
+      if (searchCount) searchCount.hidden = true;
+
+      if (searchLaunch) searchLaunch.hidden = true;
+
+      if (searchPreview) {
+
+        searchPreview.hidden = true;
+
+        searchPreview.innerHTML = "";
+
+      }
+
+      return;
+
+    }
+
+    currentSearchMatches = searchAllQuestions(trimmed);
+
+    const count = currentSearchMatches.length;
+
+    if (searchCount) {
+
+      searchCount.textContent = `تم العثور على ${count} سؤال`;
+
+      searchCount.classList.toggle("zero", count === 0);
+
+      searchCount.hidden = false;
+
+    }
+
+    if (searchLaunch) {
+
+      searchLaunch.hidden = count === 0;
+
+    }
+
+    if (searchPreview) {
+
+      searchPreview.hidden = false;
+
+      if (count === 0) {
+
+        searchPreview.innerHTML = `<div class="search-empty-msg">لا توجد أسئلة مطابقة لـ "${esc(trimmed)}"</div>`;
+
+      } else {
+
+        const previewLimit = 30;
+
+        const shown = currentSearchMatches.slice(0, previewLimit);
+
+        searchPreview.innerHTML = shown.map((m, idx) =>
+
+          `<button type="button" class="search-hit" data-hit="${idx}">
+
+            <span class="search-hit-q">${esc(m.q)}</span>
+
+            <span class="search-hit-src" style="--badge-c:${m._sourceColor || 'var(--primary)'}">📂 ${esc(m._sourceName)}</span>
+
+          </button>`
+
+        ).join("") + (count > previewLimit ? `<div class="search-empty-msg">+ ${count - previewLimit} سؤال إضافي · اضغط "▶ ابدأ مراجعة نتائج البحث" لمراجعة الكل</div>` : "");
+
+        searchPreview.querySelectorAll(".search-hit").forEach(btn => {
+
+          btn.onclick = () => launchSearchSession(trimmed, currentSearchMatches, +btn.dataset.hit);
+
+        });
+
+      }
+
+    }
+
+  }
+
+
+
+  if (searchInput) {
+
+    searchInput.value = lastSearchQuery;
+
+    searchInput.oninput = updateGlobalSearch;
+
+    searchInput.onkeydown = (e) => {
+
+      if (e.key === "Enter" && currentSearchMatches.length > 0) {
+
+        e.preventDefault();
+
+        launchSearchSession(searchInput.value, currentSearchMatches, 0);
+
+      } else if (e.key === "Escape") {
+
+        searchInput.value = "";
+
+        updateGlobalSearch();
+
+      }
+
+    };
+
+  }
+
+  if (searchClear) {
+
+    searchClear.onclick = () => {
+
+      if (!searchInput) return;
+
+      searchInput.value = "";
+
+      updateGlobalSearch();
+
+      searchInput.focus();
+
+    };
+
+  }
+
+  if (searchLaunch) {
+
+    searchLaunch.onclick = () => {
+
+      if (currentSearchMatches.length > 0) {
+
+        launchSearchSession(searchInput ? searchInput.value : lastSearchQuery, currentSearchMatches, 0);
+
+      }
+
+    };
+
+  }
+
+  if (lastSearchQuery) updateGlobalSearch();
+
+
+
+  scrollTo(0, 0);
+
+}
+
+
+
+function start(i) {
+
+  li = i;
+
+  qi = 0;
+
+  log = [];
+
+  wq = [];
+
+  userAnswers = {};
+
+  initTimerForSection();
+
+  show();
+
+}
+
+
+
+function renderStrip() {
+
+  const n = L[li].q.length;
+
+  let pills = "";
+
+  for (let idx = 0; idx < n; idx++) {
+
+    const isCur = (idx === qi);
+
+    const ans = userAnswers[idx];
+
+    let stateCls = "";
+
+    if (isCur) {
+
+      stateCls = "active";
+
+    }
+
+    if (ans && ans.answered) {
+
+      if (ans.correct) stateCls += " ok";
+
+      else if (ans.peeked) stateCls += " peeked";
+
+      else stateCls += " bad";
+
+    }
+
+    pills += `<button type="button" class="q-pill ${stateCls}" data-qi="${idx}" role="tab" aria-selected="${isCur}" aria-label="السؤال ${idx + 1}">${idx + 1}</button>`;
+
+  }
+
+  return `<div class="q-strip-wrap">
+
+    <div class="q-strip-head">
+
+      <span class="q-strip-title">شريط الأسئلة والتنقل السريع</span>
+
+      <div class="q-strip-legend">
+
+        <span class="q-strip-legend-item"><i class="q-strip-legend-dot" style="background:var(--primary)"></i> الحالي</span>
+
+        <span class="q-strip-legend-item"><i class="q-strip-legend-dot" style="background:var(--ok)"></i> صحيح</span>
+
+        <span class="q-strip-legend-item"><i class="q-strip-legend-dot" style="background:var(--bad)"></i> خطأ</span>
+
+        <span class="q-strip-legend-item"><i class="q-strip-legend-dot" style="background:var(--gold)"></i> تم كشفها</span>
+
+      </div>
+
+    </div>
+
+    <div class="q-strip" id="q-strip" role="tablist">${pills}</div>
+
+  </div>`;
+
+}
+
+
+
+function updateMidStats() {
+
+  const mid = app.querySelector(".mid");
+
+  if (!mid) return;
+
+  const n = L[li].q.length;
+
+  if (L[li].essay) {
+
+    mid.innerHTML = `<div class="qr" style="--p:${((qi + 1) / n) * 100}"><span>${qi + 1}</span></div><span class="sc">📖 بطاقة ${qi + 1}/${n}</span>`;
+
+    return;
+
+  }
+
+  const scoreVal = Object.values(userAnswers).filter(a => a && a.correct && !a.peeked).length;
+
+  const errCount = Object.values(userAnswers).filter(a => a && a.answered && !a.correct).length;
+
+  
+
+  let streak = 0;
+
+  for (let idx = qi; idx >= 0; idx--) {
+
+    const a = userAnswers[idx];
+
+    if (a && a.correct && !a.peeked) streak++;
+
+    else if (a && a.answered) break;
+
+  }
+
+  
+
+  mid.innerHTML = `
+
+    <div class="qr" style="--p:${((qi + 1) / n) * 100}"><span>${qi + 1}</span></div>
+
+    <span class="sc">⭐ ${scoreVal}</span>
+
+    ${errCount > 0 ? `<div class="qr er" title="أخطاء" style="--p:${(errCount / n) * 100}"><span>✕${errCount}</span></div>` : ""}
+
+    ${streak >= 2 ? `<span class="sc fire">🔥 ${streak}</span>` : ""}
+
+  `;
+
+}
+
+
+
+function renderKbHint(isEssay) {
+
+  return `<div class="kb-hint" aria-hidden="true">
+
+    <span>اختصارات:</span>
+
+    ${isEssay ? "" : "<span><kbd>1-4</kbd> اختيار</span><span>·</span>"}
+
+    <span><kbd>Space</kbd> الإجابة</span>
+
+    <span>·</span>
+
+    <span><kbd>←</kbd>/<kbd>→</kbd> تنقل</span>
+
+    <span>·</span>
+
+    <span><kbd>B</kbd> نجمة</span>
+
+  </div>`;
+
+}
+
+
+
+function show() {
+
+  const l = L[li], q = l.q[qi], n = l.q.length;
+
+  app.style.setProperty("--ac", q._sourceColor || acs[li] || "var(--primary)");
+
+  const isEssayQ = Boolean(l.essay || q._isEssay);
+
+  const isCodeQ = Boolean(q.isCode || q._isCode);
+
+  const sourceBadgeHtml = q._sourceName ? `<span class="q-source-badge" style="--badge-c:${q._sourceColor || 'var(--primary)'}">📂 ${esc(q._sourceName)}</span>` : "";
+
+
+
+  if (isEssayQ) {
+
+    const ans = userAnswers[qi];
+
+    const isRevealed = ans && ans.revealed;
+
+    app.innerHTML = `
+
+      <div class="bar">
+
+        <span class="tag">${l.n}</span>
+
+        <div class="mid"></div>
+
+        ${renderTimerWidget()}
+
+        <button class="link" id="back">الرجوع للأقسام</button>
+
+      </div>
+
+      <div id="exam-timer-banner-container">${renderTimeoutBanner()}</div>
+
+      <div class="prog"><i style="width:${((qi + 1) / n) * 100}%"></i></div>
+
+      ${renderStrip()}
+
+      <div class="q">
+
+        <div class="q-card-head">
+
+          <div class="q-head-meta">
+
+            <div class="kind">بطاقة استذكار ${qi + 1} من ${n} · ${isCodeQ ? "أوامر وإعدادات Cisco IOS CLI 💻" : "سؤال مقالي ونقاش 💡"}</div>
+
+            ${sourceBadgeHtml}
+
+          </div>
+
+          <div class="q-actions">
+
+            ${renderBookmarkBtnHtml(q)}
+
+            <button type="button" class="btn-copy" id="btn-copy">📋 انسخ السؤال بالإجابات المذكورة</button>
+
+          </div>
+
+        </div>
+
+        <h2 style="line-height:1.5;margin-bottom:18px;">${esc(q.q)}</h2>
+
+        ${isCodeQ ? `
+
+        <div style="margin:12px 0 16px;">
+
+          <label for="code-draft" style="display:block;margin-bottom:6px;font-size:13px;font-weight:bold;color:var(--muted);direction:rtl;text-align:right;">
+
+            ✍️ مساحة التدريب البرمجي (جرب كتابة الكود بنفسك هنا أولاً):
+
+          </label>
+
+          <textarea id="code-draft" placeholder="! Enter Cisco IOS CLI commands here to practice...&#10;! جرب كتابة أوامر Cisco IOS هنا للتدريب" style="width:100%;min-height:95px;font-family:var(--font-code);font-size:14px;direction:ltr;text-align:left;background:var(--surface-inset);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:10px 12px;white-space:pre;resize:vertical;outline:none;box-sizing:border-box;">${esc((userAnswers[qi] && userAnswers[qi].draft) || "")}</textarea>
+
+        </div>` : ""}
+
+        <button class="btn" id="show-ans" style="margin:8px 0 14px;width:100%;font-size:16px;">${isRevealed ? "🙈 إخفاء الإجابة النموذجية" : (isCodeQ ? "👁️ إظهار الكود والحل النموذجي" : "👁️ إظهار الإجابة النموذجية")}</button>
+
+        <div id="ans-box" class="fb ok" style="display:${isRevealed ? "block" : "none"};margin:12px 0 20px;border-right:none;border-left:4px solid var(--ac);padding:14px 16px;background:rgba(35,160,149,.08);border-radius:8px;">
+
+          <strong style="display:block;margin-bottom:8px;color:var(--text);direction:rtl;text-align:right;font-size:14px;">
+
+            ${isCodeQ ? "💻 الكود البرمجي النموذجي (Cisco IOS Model Solution):" : "💡 الإجابة النموذجية والشرح:"}
+
+          </strong>
+
+          ${q.desc ? `<div style="direction:rtl;text-align:right;margin-bottom:10px;font-size:14px;color:var(--text-sec);line-height:1.6;white-space:pre-wrap;">${esc(q.desc)}</div>` : ""}
+
+          ${isCodeQ 
+
+            ? `<pre style="margin:0;padding:12px 14px;background:var(--surface-inset);border:1px solid var(--line);border-radius:6px;overflow-x:auto;font-family:var(--font-code);font-size:14px;line-height:1.55;color:var(--text);white-space:pre-wrap;direction:ltr;text-align:left;"><code>${esc(q.a)}</code></pre>` 
+
+            : `<div style="white-space:pre-wrap;text-align:left;direction:ltr;font-family:inherit;font-size:15px;line-height:1.6;">${esc(q.a)}</div>`
+
+          }
+
+        </div>
+
+        <div class="q-nav">
+
+          <button type="button" class="btn alt" id="btn-prev" ${qi === 0 ? "disabled" : ""}>→ السؤال السابق</button>
+
+          <span class="q-nav-info">${qi + 1} / ${n}</span>
+
+          <button type="button" class="btn" id="btn-next">${qi === n - 1 ? (l.combined ? "إنهاء البنك الشامل 🎉" : "إنهاء المراجعة 🎉") : "السؤال التالي ←"}</button>
+
+        </div>
+
+        ${renderKbHint(true)}
+
+      </div>`;
+
+
+
+    document.getElementById("back").onclick = home;
+
+    const btnCopy = document.getElementById("btn-copy");
+
+    if (btnCopy) btnCopy.onclick = copyQuestionText;
+
+    bindBookmarkBtn(q);
+
+    const codeDraft = document.getElementById("code-draft");
+
+    if (codeDraft) {
+
+      codeDraft.oninput = () => {
+
+        if (!userAnswers[qi]) userAnswers[qi] = {};
+
+        userAnswers[qi].draft = codeDraft.value;
+
+      };
+
+    }
+
+    const showBtn = document.getElementById("show-ans");
+
+    const ansBox = document.getElementById("ans-box");
+
+    showBtn.onclick = () => {
+
+      const cur = ansBox.style.display === "block";
+
+      ansBox.style.display = cur ? "none" : "block";
+
+      showBtn.textContent = cur ? (isCodeQ ? "👁️ إظهار الكود والحل النموذجي" : "👁️ إظهار الإجابة النموذجية") : "🙈 إخفاء الإجابة النموذجية";
+
+      if (!userAnswers[qi]) userAnswers[qi] = {};
+
+      userAnswers[qi].answered = true;
+
+      userAnswers[qi].revealed = !cur;
+
+      userAnswers[qi].correct = true;
+
+      const stripPill = document.querySelector(`.q-pill[data-qi="${qi}"]`);
+
+      if (stripPill) {
+
+        stripPill.className = `q-pill active ${!cur ? "ok" : ""}`;
+
+      }
+
+      updateMidStats();
+
+    };
+
+    document.getElementById("btn-prev").onclick = navPrev;
+
+    document.getElementById("btn-next").onclick = () => {
+
+      if (qi < n - 1) { qi++; show(); }
+
+      else if (l.essay) finishEssay();
+
+      else finish();
+
+    };
+
+    document.querySelectorAll(".q-pill").forEach(pill => {
+
+      pill.onclick = () => {
+
+        const target = +pill.dataset.qi;
+
+        if (target !== qi) { qi = target; show(); }
+
+      };
+
+    });
+
+    updateMidStats();
+
+    attachTimerListeners();
+
+    const act = document.querySelector(".q-pill.active");
+
+    if (act) act.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+
+    return;
+
+  }
+
+
+
+  // Regular multiple choice / true-false question
+
+  const ans = userAnswers[qi];
+
+  const isAnswered = ans && ans.answered;
+
+
+
+  app.innerHTML = `
+
+    <div class="bar">
+
+      <span class="tag">${l.n}</span>
+
+      <div class="mid"></div>
+
+      ${renderTimerWidget()}
+
+      <button class="link" id="back">الرجوع للأقسام</button>
+
+    </div>
+
+    <div id="exam-timer-banner-container">${renderTimeoutBanner()}</div>
+
+    <div class="prog"><i style="width:${((qi + 1) / n) * 100}%"></i></div>
+
+    ${renderStrip()}
+
+    <div class="q">
+
+      <div class="q-card-head">
+
+        <div class="q-head-meta">
+
+          <div class="kind">سؤال ${qi + 1} من ${n} · ${q.tf ? "صح أم غلط" : "اختيار من متعدد"}</div>
+
+          ${sourceBadgeHtml}
+
+        </div>
+
+        <div class="q-actions">
+
+          ${renderBookmarkBtnHtml(q)}
+
+          <button type="button" class="btn-copy" id="btn-copy">📋 انسخ السؤال بالإجابات المذكورة</button>
+
+          <button type="button" class="btn-peek" id="btn-peek" ${isAnswered ? "disabled" : ""}>
+
+            ${isAnswered ? (ans.peeked ? "👁️ تم كشف الإجابة" : "✓ تم إرسال الإجابة") : "👁️ إظهار الإجابة"}
+
+          </button>
+
+        </div>
+
+      </div>
+
+      <h2>
+
+        <div>${esc(q.q)}</div>
+
+        ${q.code ? `<pre class="code-box"><code>${esc(q.code)}</code></pre>` : ""}
+
+      </h2>
+
+      <div class="${q.tf ? "tf" : ""}" id="opts">
+
+        ${q.o.map((o, k) => `<button type="button" class="opt" data-k="${k}">${esc(o)}</button>`).join("")}
+
+      </div>
+
+      <div id="fb"></div>
+
+      <div class="q-nav">
+
+        <button type="button" class="btn alt" id="btn-prev" ${qi === 0 ? "disabled" : ""}>→ السؤال السابق</button>
+
+        <span class="q-nav-info">${qi + 1} / ${n}</span>
+
+        <button type="button" class="btn" id="btn-next">${qi === n - 1 ? "إنهاء القسم 🎉" : "السؤال التالي ←"}</button>
+
+      </div>
+
+      ${renderKbHint(false)}
+
+    </div>`;
+
+
+
+  document.getElementById("back").onclick = home;
+
+  const btnCopy = document.getElementById("btn-copy");
+
+  if (btnCopy) btnCopy.onclick = copyQuestionText;
+
+  bindBookmarkBtn(q);
+
+  document.getElementById("btn-prev").onclick = navPrev;
+
+  document.getElementById("btn-next").onclick = navNext;
+
+
+
+  document.querySelectorAll(".q-pill").forEach(pill => {
+
+    pill.onclick = () => {
+
+      const target = +pill.dataset.qi;
+
+      if (target !== qi) { qi = target; show(); }
+
+    };
+
+  });
+
+
+
+  const bs = document.querySelectorAll(".opt");
+
+  if (isAnswered) {
+
+    bs.forEach((b, k) => {
+
+      b.disabled = true;
+
+      if (k === q.a) b.classList.add("ok");
+
+      else if (ans.selected !== null && k === ans.selected) b.classList.add("bad");
+
+    });
+
+    const fb = document.getElementById("fb");
+
+    if (ans.correct) {
+
+      fb.innerHTML = `<div class="fb ok" role="status">✓ إجابتك صح</div>`;
+
+    } else if (ans.peeked) {
+
+      fb.innerHTML = `<div class="fb ok" role="status">👁️ تم كشف الإجابة الصحيحة: <em>${esc(q.o[q.a])}</em></div>`;
+
+    } else {
+
+      fb.innerHTML = `<div class="fb bad" role="status">✗ إجابتك غلط<em>Correct answer: ${esc(q.o[q.a])}</em></div>`;
+
+    }
+
+  } else {
+
+    bs.forEach(b => b.onclick = () => pick(+b.dataset.k));
+
+    const btnPeek = document.getElementById("btn-peek");
+
+    if (btnPeek) btnPeek.onclick = peekAnswer;
+
+  }
+
+
+
+  updateMidStats();
+
+  attachTimerListeners();
+
+  const act = document.querySelector(".q-pill.active");
+
+  if (act) act.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+
+}
+
+
+
+function pick(k) {
+
+  const q = L[li].q[qi];
+
+  if (userAnswers[qi]) return;
+
+  const good = (k === q.a);
+
+  userAnswers[qi] = { answered: true, selected: k, correct: good, peeked: false };
+
+  if (!good) {
+
+    if (!wq.some(item => item === q)) {
+
+      wq.push(q);
+
+      try { navigator.vibrate && navigator.vibrate(40); } catch(x) {}
+
+    }
+
+    recordGlobalMistake(q);
+
+  } else {
+
+    removeGlobalMistake(q);
+
+  }
+
+  
+
+  const bs = document.querySelectorAll(".opt");
+
+  bs.forEach((b, i) => {
+
+    b.disabled = true;
+
+    if (i === q.a) b.classList.add("ok");
+
+    else if (i === k) b.classList.add("bad");
+
+  });
+
+  
+
+  const fb = document.getElementById("fb");
+
+  if (fb) {
+
+    fb.innerHTML = `<div class="fb ${good ? "ok" : "bad"}" role="status">${
+
+      good ? "✓ إجابتك صح" : "✗ إجابتك غلط"
+
+    }${good ? "" : "<em>Correct answer: " + esc(q.o[q.a]) + "</em>"}</div>`;
+
+  }
+
+  
+
+  const btnPeek = document.getElementById("btn-peek");
+
+  if (btnPeek) {
+
+    btnPeek.disabled = true;
+
+    btnPeek.textContent = "✓ تم إرسال الإجابة";
+
+  }
+
+  
+
+  if (!RM && good) {
+
+    const r = document.querySelector(".opt.ok")?.getBoundingClientRect();
+
+    if (r) confetti(r.left + r.width / 2, r.top + r.height / 2, 26);
+
+  }
+
+  
+
+  const stripPill = document.querySelector(`.q-pill[data-qi="${qi}"]`);
+
+  if (stripPill) {
+
+    stripPill.className = `q-pill active ${good ? "ok" : "bad"}`;
+
+  }
+
+  
+
+  updateMidStats();
+
+}
+
+
+
+function peekAnswer() {
+
+  const q = L[li].q[qi];
+
+  if (userAnswers[qi]) return;
+
+  userAnswers[qi] = { answered: true, selected: null, correct: false, peeked: true };
+
+  if (!wq.some(item => item === q)) {
+
+    wq.push(q);
+
+  }
+
+  recordGlobalMistake(q);
+
+  
+
+  const bs = document.querySelectorAll(".opt");
+
+  bs.forEach((b, i) => {
+
+    b.disabled = true;
+
+    if (i === q.a) b.classList.add("ok");
+
+  });
+
+  
+
+  const fb = document.getElementById("fb");
+
+  if (fb) {
+
+    fb.innerHTML = `<div class="fb ok" role="status">👁️ تم كشف الإجابة الصحيحة: <em>${esc(q.o[q.a])}</em></div>`;
+
+  }
+
+  
+
+  const btnPeek = document.getElementById("btn-peek");
+
+  if (btnPeek) {
+
+    btnPeek.disabled = true;
+
+    btnPeek.textContent = "👁️ تم كشف الإجابة";
+
+  }
+
+  
+
+  const stripPill = document.querySelector(`.q-pill[data-qi="${qi}"]`);
+
+  if (stripPill) {
+
+    stripPill.className = "q-pill active peeked";
+
+  }
+
+  
+
+  updateMidStats();
+
+}
+
+
+
+function copyToClipboard(text, onSuccess) {
+
+  function fallback() {
+
+    try {
+
+      const ta = document.createElement("textarea");
+
+      ta.value = text;
+
+      ta.style.position = "fixed";
+
+      ta.style.top = "0";
+
+      ta.style.left = "-9999px";
+
+      ta.setAttribute("readonly", "");
+
+      document.body.appendChild(ta);
+
+      ta.select();
+
+      ta.setSelectionRange(0, 99999);
+
+      const ok = document.execCommand("copy");
+
+      document.body.removeChild(ta);
+
+      if (ok && onSuccess) onSuccess();
+
+    } catch (err) {
+
+      console.warn("Fallback copy failed:", err);
+
+    }
+
+  }
+
+
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+
+    navigator.clipboard.writeText(text).then(() => {
+
+      if (onSuccess) onSuccess();
+
+    }).catch(() => {
+
+      fallback();
+
+    });
+
+  } else {
+
+    fallback();
+
+  }
+
+}
+
+
+
+function copyQuestionText() {
+
+  const l = L[li], q = l.q[qi];
+
+  let text = "";
+
+
+
+  if (l.essay || q._isEssay) {
+
+    text = (q.q || "").trim();
+
+    if (q.desc && q.desc.trim()) {
+
+      text += "\n\n" + q.desc.trim();
+
+    }
+
+    if (q.a && q.a.trim()) {
+
+      text += "\n\n" + ((q.isCode || q._isCode) ? "[Cisco IOS Model Solution]\n" : "[Model Answer]\n") + q.a.trim();
+
+    }
+
+  } else if (q.tf || (Array.isArray(q.o) && q.o.length === 2 && q.o[0] === "True" && q.o[1] === "False")) {
+
+    text = (q.q || "").trim();
+
+    if (q.code && q.code.trim()) {
+
+      text += "\n\n" + q.code.trim();
+
+    }
+
+    text += "\n\n(True / False)";
+
+  } else {
+
+    text = (q.q || "").trim();
+
+    if (q.code && q.code.trim()) {
+
+      text += "\n\n" + q.code.trim();
+
+    }
+
+    if (Array.isArray(q.o) && q.o.length > 0) {
+
+      const opts = q.o.map((opt, i) => `${String.fromCharCode(65 + i)}) ${String(opt).trim()}`).join("\n");
+
+      text += "\n\n" + opts;
+
+    }
+
+  }
+
+
+
+  copyToClipboard(text, () => {
+
+    const btn = document.getElementById("btn-copy");
+
+    if (!btn) return;
+
+    const origText = "📋 انسخ السؤال بالإجابات المذكورة";
+
+    btn.textContent = "✅ تم النسخ!";
+
+    btn.classList.add("copied");
+
+    if (btn._copyTimer) clearTimeout(btn._copyTimer);
+
+    btn._copyTimer = setTimeout(() => {
+
+      btn.textContent = origText;
+
+      btn.classList.remove("copied");
+
+      btn._copyTimer = null;
+
+    }, 1500);
+
+  });
+
+}
+
+
+
+function navPrev() {
+
+  if (qi > 0) {
+
+    qi--;
+
+    show();
+
+  }
+
+}
+
+
+
+function navNext() {
+
+  const n = L[li].q.length;
+
+  if (qi < n - 1) {
+
+    qi++;
+
+    show();
+
+  } else {
+
+    if (L[li].essay) finishEssay();
+
+    else finish();
+
+  }
+
+}
+
+
+
+function finishEssay() {
+
+  stopTimerInterval();
+
+  const n = L[li].q.length;
+
+  best[li] = n;
+
+  save();
+
+  const isCodeSec = L[li].isCode;
+
+  app.innerHTML = `<div class="res">
+
+    <div>${isCodeSec ? "أتممت التدريب البرمجي" : "أتممت مراجعة"}</div>
+
+    <div class="n" style="--p:100"><span>${n}/${n}</span></div>
+
+    <p>🎉 أحسنت! ${isCodeSec ? "أتممت التدريب على جميع أوامر وإعدادات Cisco IOS المقررة بالكامل مع النماذج الصحيحة." : "راجعت جميع بطاقات الأسئلة المقالية ونماذج إجاباتها بالتفصيل."}</p>
+
+    <div class="res-time-summary">⏱️ إجمالي الوقت المستغرق: <b>${formatTimerArabic(stopwatchSeconds)}</b> (${formatTimerDigits(stopwatchSeconds)})</div>
+
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+
+      <button class="btn" id="re">${isCodeSec ? "أعد التمارين" : "أعد المراجعة"}</button>
+
+      <button class="btn alt" id="hm">كل الأقسام</button>
+
+    </div>
+
+  </div>`;
+
+  document.getElementById("re").onclick = () => start(li);
+
+  document.getElementById("hm").onclick = home;
+
+  scrollTo(0, 0);
+
+  if (!RM) {
+
+    for (let i = 0; i < 4; i++) setTimeout(() => confetti(innerWidth * (.2 + i * .2), innerHeight * .3, 30), i * 250);
+
+  }
+
+}
+
+
+
+function finish() {
+
+  stopTimerInterval();
+
+  const l = L[li], n = l.q.length;
+
+  const scoreVal = Object.values(userAnswers).filter(a => a && a.correct && !a.peeked).length;
+
+  if (li < BASE_SECTIONS && (best[li] == null || scoreVal > best[li])) {
+
+    best[li] = scoreVal;
+
+    save();
+
+  }
+
+  const pct = Math.round((scoreVal / n) * 100);
+
+  const wrongCount = n - scoreVal;
+
+  
+
+  const rk = pct >= 90 ? ["👑", "CCIE Master", "أسطورة الشبكات"] :
+
+             pct >= 75 ? ["⚡", "CCNP Expert", "مهندس شبكات محترف"] :
+
+             pct >= 50 ? ["🧑‍💻", "CCNA Explorer", "مهندس شبكات واعد"] :
+
+                         ["🌱", "Novice", "راجع واستمر وهتوصل"];
+
+                         
+
+  app.innerHTML = `<div class="res">
+
+    <div>نتيجتك في ${l.n}</div>
+
+    <div class="rank">${rk[0]} <b>${rk[1]}</b><small>${rk[2]}</small></div>
+
+    <div class="rings">
+
+      <figure>
+
+        <div class="n" style="--p:${pct}"><span>${scoreVal}/${n}</span></div>
+
+        <figcaption>✅ صح</figcaption>
+
+      </figure>
+
+      <figure>
+
+        <div class="n n2" style="--p:${Math.round((wrongCount / n) * 100)}"><span>${wrongCount}</span></div>
+
+        <figcaption>❌ أخطاء أو تخطي</figcaption>
+
+      </figure>
+
+      <figure>
+
+        <div class="n time-ring" style="--p:100">
+
+          <span style="font-size:clamp(15px, 3.5vw, 20px);font-family:var(--font-code);font-weight:700;direction:ltr;">${formatTimerDigits(stopwatchSeconds)}</span>
+
+        </div>
+
+        <figcaption>⏱️ الوقت المستغرق</figcaption>
+
+      </figure>
+
+    </div>
+
+    <p>${pct >= 80 ? "ممتاز! أنت متمكن من هذا القسم" : pct >= 50 ? "أداء جيد، راجع الأسئلة التي أخطأت فيها بالأسفل" : "محتاج تراجع القسم ده مرة تانية وتحاول من جديد"}</p>
+
+    <div class="res-time-summary">⏱️ إجمالي الوقت المستغرق: <b>${formatTimerArabic(stopwatchSeconds)}</b></div>
+
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;">
+
+      <button class="btn" id="re">أعد الاختبار</button>
+
+      ${wq.length ? `<button class="btn" id="rw">🔁 راجع الأخطاء فقط (${wq.length})</button>` : ""}
+
+      <button class="btn alt" id="hm">كل الأقسام</button>
+
+    </div>
+
+    <div class="rev">
+
+      ${l.q.map((q, idx) => {
+
+        const a = userAnswers[idx];
+
+        const srcTag = q._sourceName ? ` <span class="q-source-badge" style="--badge-c:${q._sourceColor || 'var(--primary)'};margin-inline-start:6px;">📂 ${esc(q._sourceName)}</span>` : "";
+
+        if (q._isEssay) {
+
+          const isReviewed = a && a.answered;
+
+          const tag = isReviewed ? "📖 تمت مراجعة البطاقة" : "⏭️ بطاقة لم تُراجع";
+
+          const cls = isReviewed ? "ok" : "bad";
+
+          const ansBlock = (q.isCode || q._isCode)
+
+            ? `<pre class="code-box" style="margin:8px 0;font-size:13px;padding:8px 12px;"><code>${esc(q.a)}</code></pre>`
+
+            : `<br><em style="display:inline-block;margin-top:6px;color:var(--text-sec);white-space:pre-wrap;">الإجابة النموذجية: ${esc(q.a)}</em>`;
+
+          return `<div class="${cls}">
+
+            <b>${idx + 1}. ${tag}</b>${srcTag}: ${esc(q.q)}
+
+            ${ansBlock}
+
+          </div>`;
+
+        }
+
+        const isGood = a && a.correct && !a.peeked;
+
+        const isSkipped = !a || !a.answered;
+
+        const isPeeked = a && a.peeked;
+
+        const tag = isGood ? "✓ إجابة صحيحة" : isSkipped ? "⏭️ تم التخطي" : isPeeked ? "👁️ تم كشف الإجابة" : "✗ إجابة خاطئة";
+
+        const cls = isGood ? "ok" : "bad";
+
+        return `<div class="${cls}">
+
+          <b>${idx + 1}. ${tag}</b>${srcTag}: ${esc(q.q)}
+
+          ${q.code ? `<pre class="code-box" style="margin:8px 0;font-size:13px;padding:8px 12px;"><code>${esc(q.code)}</code></pre>` : ""}
+
+          ${isGood ? "" : `<br><em style="display:inline-block;margin-top:6px;color:var(--text-sec)">الإجابة الصحيحة: ${esc(q.o[q.a])}</em>`}
+
+        </div>`;
+
+      }).join("")}
+
+    </div>
+
+  </div>`;
+
+  
+
+  document.getElementById("re").onclick = () => start(li);
+
+  document.getElementById("hm").onclick = home;
+
+  const rw = document.getElementById("rw");
+
+  if (rw && wq.length) {
+
+    rw.onclick = () => {
+
+      const qs = wq.slice();
+
+      L.push({ n: "مراجعة الأخطاء", s: "Review Mistakes", q: qs });
+
+      start(L.length - 1);
+
+    };
+
+  }
+
+  scrollTo(0, 0);
+
+  if (!RM && pct >= 80) {
+
+    for (let i = 0; i < 4; i++) {
+
+      setTimeout(() => confetti(innerWidth * (0.2 + i * 0.2), innerHeight * 0.3, 30), i * 250);
+
+    }
+
+  }
+
+}
+
+
+
+// Speed-Run Keyboard Shortcuts
+
+window.addEventListener("keydown", (e) => {
+
+  if (li === undefined || !L[li] || !document.querySelector(".q")) return;
+
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+  const target = e.target;
+
+  if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.tagName === "SELECT" || target.isContentEditable)) return;
+
+
+
+  // Keys 1-4: Select option A/B/C/D (or 1=True, 2=False for True/False)
+
+  let optIdx = -1;
+
+  if (!e.shiftKey) {
+
+    const keyMap = { "1": 0, "2": 1, "3": 2, "4": 3, "١": 0, "٢": 1, "٣": 2, "٤": 3 };
+
+    const codeMap = { Digit1: 0, Digit2: 1, Digit3: 2, Digit4: 3, Numpad1: 0, Numpad2: 1, Numpad3: 2, Numpad4: 3 };
+
+    if (Object.prototype.hasOwnProperty.call(keyMap, e.key)) optIdx = keyMap[e.key];
+
+    else if (Object.prototype.hasOwnProperty.call(codeMap, e.code)) optIdx = codeMap[e.code];
+
+  }
+
+  if (optIdx !== -1) {
+
+    const opts = document.querySelectorAll("#opts .opt");
+
+    if (opts[optIdx] && !opts[optIdx].disabled) {
+
+      e.preventDefault();
+
+      opts[optIdx].click();
+
+    }
+
+    return;
+
+  }
+
+
+
+  // Space: Toggle "إظهار الإجابة" or flip flashcard
+
+  if (e.code === "Space" || e.key === " ") {
+
+    e.preventDefault();
+
+    if (document.activeElement && document.activeElement.tagName === "BUTTON") {
+
+      document.activeElement.blur();
+
+    }
+
+    const showBtn = document.getElementById("show-ans");
+
+    if (showBtn) {
+
+      showBtn.click();
+
+    } else {
+
+      const btnPeek = document.getElementById("btn-peek");
+
+      if (btnPeek && !btnPeek.disabled) {
+
+        btnPeek.click();
+
+      } else {
+
+        const fb = document.getElementById("fb");
+
+        if (fb && fb.innerHTML.trim()) {
+
+          const hidden = fb.style.display === "none";
+
+          fb.style.display = hidden ? "" : "none";
+
+          const q = L[li].q[qi];
+
+          if (q && userAnswers[qi] && userAnswers[qi].peeked) {
+
+            const optOk = document.querySelectorAll("#opts .opt")[q.a];
+
+            if (optOk) optOk.classList.toggle("ok", hidden);
+
+          }
+
+        }
+
+      }
+
+    }
+
+    return;
+
+  }
+
+
+
+  // RTL Navigation: ArrowRight = Previous, ArrowLeft = Next
+
+  if (e.key === "ArrowRight") {
+
+    e.preventDefault();
+
+    navPrev();
+
+    return;
+
+  }
+
+  if (e.key === "ArrowLeft") {
+
+    e.preventDefault();
+
+    navNext();
+
+    return;
+
+  }
+
+
+
+  // B / b: Toggle "⭐ علّم للمراجعة" bookmark button
+
+  if (e.key === "b" || e.key === "B" || e.code === "KeyB") {
+
+    e.preventDefault();
+
+    const bmBtn = document.getElementById("btn-bookmark");
+
+    if (bmBtn) bmBtn.click();
+
+  }
+
+});
+
+
+
+// Touch Swipe Navigation
+
+let touchStartX = 0, touchStartY = 0;
+
+window.addEventListener("touchstart", (e) => {
+
+  if (e.touches && e.touches.length === 1) {
+
+    touchStartX = e.touches[0].clientX;
+
+    touchStartY = e.touches[0].clientY;
+
+  }
+
+}, { passive: true });
+
+
+
+window.addEventListener("touchend", (e) => {
+
+  if (!touchStartX || !e.changedTouches || e.changedTouches.length === 0) return;
+
+  if (li === undefined || !document.querySelector(".q")) return;
+
+  const dx = e.changedTouches[0].clientX - touchStartX;
+
+  const dy = e.changedTouches[0].clientY - touchStartY;
+
+  touchStartX = 0;
+
+  touchStartY = 0;
+
+  if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+
+    if (dx > 0) {
+
+      navPrev();
+
+    } else {
+
+      navNext();
+
+    }
+
+  }
+
+}, { passive: true });
+
+
+
+// Initial Render & Timers
+
+home();
+
+updateLiveClock();
+
+setInterval(updateLiveClock, 1000);
+
+
+
+// Theme Toggle
+
+(function() {
+
+  const tgl = document.getElementById("tgl");
+
+  if (tgl) {
+
+    tgl.onclick = () => {
+
+      const cur = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", cur);
+
+      try { localStorage.setItem("ccna4_theme", cur); } catch(e){}
+
+    };
+
+  }
+
+})();
+
+</script>
+
+<script src="all_questions.js"></script>
+
+<script src="pomodoro.js"></script>
+</body>
+
+</html>
+
