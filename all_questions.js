@@ -93,7 +93,7 @@
         combinedQuestions.push(Object.assign({}, item, {
           _sourceName: sec.n,
           _sourceColor: getAccentColor(sIdx),
-          _isEssay: Boolean(sec.essay),
+          _isEssay: Boolean(sec.essay || item.isEssay || item.type === "essay" || (item.o == null && item.a != null)),
           _isCode: Boolean(item.isCode || sec.isCode)
         }));
       }
@@ -141,9 +141,9 @@
       "</div>" +
       '<div class="ring" style="--p:100"><div class="badge">📚</div></div>' +
       "<div>" +
-        "<b>📚 بنك الأسئلة الشامل (كل الشيتات)</b>" +
+        "<b>📚 بنك الأسئلة الشامل (كل الأقسام)</b>" +
         "<span>All Questions Combined — Complete Question Bank</span>" +
-        "<small>" + totalQuestions + " سؤال · جميع أسئلة CCNA R&S IV مجمّعة بالترتيب في مكان واحد (كل الشيتات الأربعة)</small>" +
+        "<small>" + totalQuestions + " سؤال · جميع أسئلة CCNA R&S IV مجمّعة بالترتيب في مكان واحد (الشيتات والأسئلة المولّدة)</small>" +
         '<i class="mini"><b style="width:100%"></b></i>' +
       "</div>";
 
